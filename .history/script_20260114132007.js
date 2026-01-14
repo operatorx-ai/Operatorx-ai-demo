@@ -159,19 +159,23 @@ function startDemo(type) {
     setTimeout(() => {
         typingIndicator.style.display = 'none';
         animateDemo();
-    }, 2500);
+    }, 2000);
 }
 
 function createConfetti() {
-    const container = document.getElementById('demoContainer');
-    const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+    conAdd progress bar
+    html += '<div class="progress-bar-container"><div class="progress-bar"></div></div>';
     
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
+    // Section 1: Problems
+    html += '<div class="section-header">⚠️ What\'s Costing You Time Every Week</div>';
+    html += '<ul class="problem-list">';
+    currentDemo.problems.forEach((problem, index) => {
+        html += `<li class="problem-item" style="animation-delay: ${index * 0.1}sElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = (Math.random() * 2 + 2) + 's';
+        confetti.style.animationDela(automation, index) => {
+        html += `<li class="automation-item" style="animation-delay: ${index * 0.15}s(Math.random() * 2 + 2) + 's';
         container.appendChild(confetti);
         
         // Remove after animation
@@ -183,14 +187,8 @@ function animateDemo() {
     const outputSection = document.getElementById('outputSection');
     let html = '';
     
-    // Executive Summary
-    html += '<div class="executive-summary">';
-    html += '<h2>🎯 Executive Summary</h2>';
-    html += `<p>${currentDemo.executiveSummary}</p>`;
-    html += '</div>';
-    
     // Section 1: Problems
-    html += '<div class="section-header">⚠️ The Hidden Cost of Manual Operations</div>';
+    html += '<div class="section-header">⚠️ What\'s Costing You Time Every Week</div>';
     html += '<ul class="problem-list">';
     currentDemo.problems.forEach(problem => {
         html += `<li class="problem-item">${problem}</li>`;
@@ -198,7 +196,7 @@ function animateDemo() {
     html += '</ul>';
     
     // Section 2: Automations
-    html += '<div class="section-header">✨ Your Competitive Advantage: Automated Operations</div>';
+    html += '<div class="section-header">✨ What\'s Now Automated For You</div>';
     html += '<ul class="automation-list">';
     currentDemo.automations.forEach(automation => {
         html += `<li class="automation-item">${automation}</li>`;
@@ -221,67 +219,36 @@ function animateDemo() {
     html += '</div>';
     
     // Section 4: Time Saved
-    html += '<div class="section-header">💰 Return On Investment</div>';
+    html += '<div class="section-header">⏰ Time & Money Saved</div>';
     html += `
         <div class="savings-box">
-            <div class="savings-row">
-                <div class="savings-item">
-                    <div class="savings-label">Time Saved Weekly</div>
-                    <div class="savings-stat">${currentDemo.liveExample.timePerWeek}</div>
-                </div>
-                <div class="savings-item">
-                    <div class="savings-label">Time Saved Monthly</div>
-                    <div class="savings-stat">${currentDemo.liveExample.timePerMonth}</div>
-                </div>
-            </div>
-            <div class="roi-comparison">
-                <div class="roi-box">
-                    <div class="roi-label">Hiring Cost (Annual)</div>
-                    <div class="roi-value cost">$40,000 - $60,000</div>
-                </div>
-                <div class="roi-vs">VS</div>
-                <div class="roi-box">
-                    <div class="roi-label">OperatorX-AI (Annual)</div>
-                    <div class="roi-value savings">$3,588</div>
-                </div>
-            </div>
-            <div class="savings-headline">Save $36,000+ Annually While Scaling Your Business</div>
+            <div class="savings-label">Time Saved Per Week</div>
+            <div class="savings-stat">${currentDemo.liveExample.timePerWeek}</div>
+            <div class="savings-label">Time Saved Per Month</div>
+            <div class="savings-stat">${currentDemo.liveExample.timePerMonth}</div>
         </div>
     `;
     
     // Section 5: Value Statement
-    html += `<div class="value-statement">💡 <strong>Bottom Line:</strong> ${currentDemo.liveExample.value}</div>`;
-    
-    // Call to Action
-    html += `
-        <div class="cta-section">
-            <h3>Ready to Transform Your Business?</h3>
-            <p>Join 1,000+ business owners who have already automated their operations</p>
-            <div class="cta-stats">
-                <div class="cta-stat">4.9/5 ⭐ Rating</div>
-                <div class="cta-stat">30-Day Guarantee</div>
-                <div class="cta-stat">Setup in 24 Hours</div>
-            </div>
-        </div>
-    `;
+    html += `<div class="value-statement">💡 ${currentDemo.liveExample.value}</div>`;
     
     outputSection.innerHTML = html;
     
-    // Trigger confetti at ROI reveal
+    // Trigger confetti at savings reveal
     setTimeout(() => {
         createConfetti();
-    }, 3500);
+    }, 2000);
     
-    // Animate sections appearing with professional timing
-    const sections = outputSection.querySelectorAll('.executive-summary, .section-header, .problem-list, .automation-list, .live-example, .savings-box, .value-statement, .cta-section');
+    // Animate sections appearing
+    const sections = outputSection.querySelectorAll('.section-header, .problem-list, .automation-list, .live-example, .savings-box, .value-statement');
     sections.forEach((section, index) => {
         section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
+        section.style.transform = 'translateY(20px)';
         setTimeout(() => {
-            section.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            section.style.transition = 'all 0.5s ease';
             section.style.opacity = '1';
             section.style.transform = 'translateY(0)';
-        }, index * 400);
+        }, index * 300);
     });
 }
 

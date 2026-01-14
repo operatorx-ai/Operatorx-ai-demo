@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operatorx-AI Live Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="confetti-container" id="confettiContainer"></div>
+    
+    <div class="container">
+        <header>
+            <h1>💼 OperatorX-AI</h1>
+            <p class="subtitle">The AI Operations Manager That Never Sleeps</p>
+            <p class="roi-highlight">Save 20-40 hours/month • Increase revenue by 15-25% • Zero hiring costs</p>
+            <div class="floating-emojis">
+                <span style="--delay: 0s;">⚡</span>
+                <span style="--delay: 0.5s;">💰</span>
+                <span style="--delay: 1s;">⏰</span>
+                <span style="--delay: 1.5s;">🚀</span>
+            </div>
+        </header>
+
+        <div class="value-props">
+            <div class="value-card">
+                <div class="value-icon">💰</div>
+                <h3>Increase Cash Flow</h3>
+                <p>Get paid 30-40% faster with automated follow-ups</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⏰</div>
+                <h3>Reclaim Your Time</h3>
+                <p>Save 20-40 hours monthly on administrative tasks</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">📈</div>
+                <h3>Grow Revenue</h3>
+                <p>15-25% revenue increase through automation</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🚀</div>
+                <h3>Scale Without Hiring</h3>
+                <p>Replace $40-60K/year in administrative costs</p>
+            </div>
+        </div>
+
+        <div class="demo-selector">
+            <h2>See How It Works For Your Industry:</h2>
+            <div class="button-group">
+                <button class="demo-btn" data-type="default">General Service Business</button>
+                <button class="demo-btn" data-type="salon">Salon / Beauty</button>
+                <button class="demo-btn" data-type="contractor">Contractor / HVAC</button>
+                <button class="demo-btn" data-type="retail">Retail / Store</button>
+            </div>
+        </div>
+
+        <div class="demo-container" id="demoContainer" style="display: none;">
+            <div class="status-bar">
+                <span class="status-indicator"></span>
+                <span>AI Operations Manager Active</span>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-actions" id="footerActions" style="display: none;">
+            <button class="action-btn reset-btn" id="resetBtn">🔄 Run Another Demo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

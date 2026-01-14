@@ -163,15 +163,19 @@ function startDemo(type) {
 }
 
 function createConfetti() {
-    const container = document.getElementById('demoContainer');
-    const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+    conAdd progress bar
+    html += '<div class="progress-bar-container"><div class="progress-bar"></div></div>';
     
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
+    // Section 1: Problems
+    html += '<div class="section-header">⚠️ What\'s Costing You Time Every Week</div>';
+    html += '<ul class="problem-list">';
+    currentDemo.problems.forEach((problem, index) => {
+        html += `<li class="problem-item" style="animation-delay: ${index * 0.1}sElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = (Math.random() * 2 + 2) + 's';
+        confetti.style.animationDela(automation, index) => {
+        html += `<li class="automation-item" style="animation-delay: ${index * 0.15}s(Math.random() * 2 + 2) + 's';
         container.appendChild(confetti);
         
         // Remove after animation

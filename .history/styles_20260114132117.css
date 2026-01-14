@@ -486,39 +486,6 @@ header h1 {
     }
 }
 
-.roi-label {
-    font-size: 0.9em;
-    opacity: 0.9;
-    margin-bottom: 10px;
-}
-
-.roi-value {
-    font-size: 2em;
-    font-weight: 700;
-}
-
-.roi-value.cost {
-    color: #fca5a5;
-}
-
-.roi-value.savings {
-    color: #6ee7b7;
-}
-
-.roi-vs {
-    font-size: 1.5em;
-    font-weight: 700;
-    opacity: 0.8;
-}
-
-.savings-headline {
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-}
-
 .savings-stat {
     font-size: 2.5em;
     font-weight: 700;
@@ -560,44 +527,6 @@ header h1 {
 .value-statement strong {
     color: #78350f;
     font-weight: 700;
-}
-
-.cta-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    margin: 30px 0;
-    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
-}
-
-.cta-section h3 {
-    font-size: 2em;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.cta-section p {
-    font-size: 1.2em;
-    opacity: 0.95;
-    margin-bottom: 25px;
-}
-
-.cta-stats {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.cta-stat {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
 }
 
 .typing-indicator {
