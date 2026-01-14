@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operatorx-AI Live Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Operatorx-AI Operations Manager</h1>
+            <p class="subtitle">Your Business. Automated.</p>
+        </header>
+
+        <div class="demo-selector">
+            <h2>Select Business Type:</h2>
+            <div class="button-group">
+                <button class="demo-btn" data-type="default">General Service Business</button>
+                <button class="demo-btn" data-type="salon">Salon / Beauty</button>
+                <button class="demo-btn" data-type="contractor">Contractor / HVAC</button>
+                <button class="demo-btn" data-type="retail">Retail / Store</button>
+            </div>
+        </div>
+
+        <div class="demo-container" id="demoContainer" style="display: none;">
+            <div class="status-bar">
+                <span class="status-indicator"></span>
+                <span>AI Operations Manager Active</span>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-actions" id="footerActions" style="display: none;">
+            <button class="action-btn reset-btn" id="resetBtn">🔄 Run Another Demo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
