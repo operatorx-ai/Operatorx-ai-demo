@@ -1372,42 +1372,6 @@ function updateDashboard(content) {
         `).join('');
     }
 }
-        screen2Header.textContent = content.screen2Header;
-    }
-    
-    const featureCards = document.querySelectorAll('.feature-card p:first-of-type');
-    if (featureCards.length >= 2) {
-        featureCards[0].textContent = content.card1Desc;
-        featureCards[1].textContent = content.card2Desc;
-    }
-    
-    // Update Screen 3
-    const commandHeader = document.querySelector('.command-header h2');
-    if (commandHeader) {
-        commandHeader.textContent = content.screen3Header;
-    }
-    
-    const inputPlaceholder = document.getElementById('aiInput');
-    if (inputPlaceholder) {
-        inputPlaceholder.placeholder = content.inputPlaceholder;
-    }
-    
-    // Update Quick Actions
-    const quickActionsContainer = document.querySelector('.quick-actions');
-    if (quickActionsContainer) {
-        quickActionsContainer.innerHTML = `
-            <p class="quick-label">Quick Start:</p>
-            ${content.quickActions.map(action => `
-                <button class="quick-btn" onclick="loadScenario('${action.scenario}')">
-                    ${action.text}
-                </button>
-            `).join('')}
-            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem; font-style: italic;">These are simulated enterprise workflows.</p>
-        `;
-    }
-    
-    console.log(`✓ Switched to ${content.name} organization`);
-}
 
 // Updated loadScenario to handle industry-specific scenarios
 function loadIndustryScenario(scenarioKey) {
