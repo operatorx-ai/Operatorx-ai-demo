@@ -1616,12 +1616,141 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// ===== HERO DEMO PLAYER =====
+const heroDemoContent = {
+    prevent: {
+        title: "Prevent $45K Duplicate Payment",
+        icon: "🛡️",
+        steps: [
+            { icon: "📥", text: "New vendor invoice received: $45,000" },
+            { icon: "🔍", text: "AI scanning payment history..." },
+            { icon: "⚠️", text: "ALERT: Duplicate payment detected!" },
+            { icon: "🛑", text: "Payment automatically blocked" }
+        ],
+        result: {
+            title: "Crisis Prevented",
+            savings: "$45,000",
+            message: "AI detected this invoice was already paid under a different reference number"
+        },
+        frequency: "12,450",
+        period: "month"
+    },
+    automate: {
+        title: "Auto-Collect Rent from 47 Units",
+        icon: "⚡",
+        steps: [
+            { icon: "📋", text: "47 rent payments due today" },
+            { icon: "🤖", text: "AI initiating auto-collection..." },
+            { icon: "💳", text: "Processing payments automatically" },
+            { icon: "✅", text: "46/47 collected successfully" }
+        ],
+        result: {
+            title: "Collection Complete",
+            savings: "98%",
+            message: "1 declined payment flagged for follow-up"
+        },
+        frequency: "8,200",
+        period: "month"
+    },
+    detect: {
+        title: "Catch $12K Vendor Overcharge",
+        icon: "🔍",
+        steps: [
+            { icon: "📄", text: "Vendor invoice: $24,500" },
+            { icon: "📊", text: "AI cross-checking contract terms..." },
+            { icon: "⚠️", text: "ALERT: Price exceeds contract by $12,300" },
+            { icon: "🛑", text: "Payment paused for review" }
+        ],
+        result: {
+            title: "Overcharge Detected",
+            savings: "$12,300",
+            message: "Invoice pricing doesn't match contract terms"
+        },
+        frequency: "3,800",
+        period: "month"
+    }
+};
+
+async function playHeroDemo(demoType) {
+    const demo = heroDemoContent[demoType];
+    if (!demo) return;
+    
+    // Show the demo player
+    const demoPlayer = document.getElementById('heroDemoPlayer');
+    demoPlayer.style.display = 'block';
+    demoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Update title
+    document.querySelector('.demo-player-header h4').textContent = demo.title;
+    
+    // Get containers
+    const timeline = document.getElementById('heroTimeline');
+    const result = document.getElementById('heroResult');
+    const impactBanner = document.getElementById('heroImpactBanner');
+    
+    // Clear previous content
+    timeline.innerHTML = '';
+    result.innerHTML = '';
+    impactBanner.style.display = 'none';
+    
+    // Auto-play the demo (8 seconds total, 2 seconds per step)
+    for (let i = 0; i < demo.steps.length; i++) {
+        const step = demo.steps[i];
+        const stepEl = document.createElement('div');
+        stepEl.className = 'timeline-step active';
+        stepEl.innerHTML = `
+            <span class="step-icon">${step.icon}</span>
+            <span class="step-text">${step.text}</span>
+        `;
+        timeline.appendChild(stepEl);
+        
+        // Wait 2 seconds between steps
+        await sleep(2000);
+    }
+    
+    // Show result after timeline completes
+    await sleep(500);
+    result.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <span style="font-size: 2rem;">${demo.icon}</span>
+            <div>
+                <h4 style="margin: 0; color: var(--color-accent-success);">${demo.result.title}</h4>
+                <p style="margin: 0; color: var(--color-text-tertiary); font-size: 0.875rem;">${demo.result.message}</p>
+            </div>
+        </div>
+        <div style="background: rgba(16, 185, 129, 0.15); padding: 1rem; border-radius: var(--radius-md); text-align: center;">
+            <div style="font-size: 2.5rem; font-weight: 800; color: var(--color-accent-success);">${demo.result.savings}</div>
+            <div style="font-size: 0.875rem; color: var(--color-text-tertiary);">Saved</div>
+        </div>
+    `;
+    
+    // Show impact banner
+    await sleep(500);
+    impactBanner.style.display = 'flex';
+    impactBanner.innerHTML = `
+        <div class="impact-text">
+            <div class="impact-label">Automatically Handled</div>
+            <div class="impact-value">${demo.frequency} times/${demo.period}</div>
+        </div>
+        <button class="btn-primary" onclick="navigateToScreen(2)">
+            See Full Business Impact →
+        </button>
+    `;
+}
+
+function closeHeroDemo() {
+    const demoPlayer = document.getElementById('heroDemoPlayer');
+    demoPlayer.style.display = 'none';
+}
+
 // Export for potential module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         navigateToScreen,
         loadScenario,
         executeAI,
-        switchOrganization
+        switchOrganization,
+        playHeroDemo,
+        closeHeroDemo
     };
 }

@@ -36,52 +36,84 @@
         </div>
         
         <div class="container hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-headline fade-up" data-dynamic="hero-headline">
-                        An AI Operator Built for <span data-dynamic="industry-name">Property Management</span> Operations
+            <div class="hero-content-new">
+                <div class="hero-header">
+                    <h1 class="hero-headline-new" data-dynamic="hero-headline">
+                        An AI Operator Built for <span class="gradient-text" data-dynamic="industry-name">Property Management</span> Operations
                     </h1>
-                    <p class="hero-subheadline fade-up delay-1" data-dynamic="hero-subheadline">
-                        Autonomously manage rent collection, tenant payments, and maintenance invoices with policy-driven AI execution.
+                    <p class="hero-subheadline-new" data-dynamic="hero-subheadline">
+                        Watch AI prevent costly mistakes, save time, and execute operations autonomously
                     </p>
-                    <p class="hero-supporting fade-up delay-1" style="font-size: 0.875rem; color: var(--color-text-tertiary); margin-top: -1rem; margin-bottom: 2rem; max-width: 600px;">
-                        Designed for organizations that require accuracy, control, and accountability.
-                    </p>
-                    <div class="hero-cta fade-up delay-2">
-                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <button class="btn-primary" onclick="navigateToScreen(2)">
-                                See Business Impact
-                                <span class="btn-arrow">→</span>
-                            </button>
-                            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin: 0;" data-dynamic="cta-micro">Simulated enterprise environment for property management workflows.</p>
-                        </div>
-                        <button class="btn-secondary" onclick="navigateToScreen(10)">
-                            View How It Works
+                </div>
+
+                <!-- Interactive Demo Buttons -->
+                <div class="hero-demo-section">
+                    <h3 class="demo-section-title">Choose what you want to see:</h3>
+                    <div class="hero-demo-buttons" data-dynamic-container="hero-demo-buttons">
+                        <button class="demo-action-btn" onclick="playHeroDemo('prevent')" data-demo="prevent">
+                            <div class="demo-btn-icon">🛡️</div>
+                            <div class="demo-btn-content">
+                                <div class="demo-btn-title">Prevent $45K Duplicate Payment</div>
+                                <div class="demo-btn-subtitle">Watch AI catch what humans miss</div>
+                            </div>
+                            <div class="demo-btn-arrow">▶</div>
+                        </button>
+
+                        <button class="demo-action-btn" onclick="playHeroDemo('automate')" data-demo="automate">
+                            <div class="demo-btn-icon">⚡</div>
+                            <div class="demo-btn-content">
+                                <div class="demo-btn-title">Auto-Collect Rent from 47 Units</div>
+                                <div class="demo-btn-subtitle">Watch AI execute complex workflows</div>
+                            </div>
+                            <div class="demo-btn-arrow">▶</div>
+                        </button>
+
+                        <button class="demo-action-btn" onclick="playHeroDemo('detect')" data-demo="detect">
+                            <div class="demo-btn-icon">🔍</div>
+                            <div class="demo-btn-content">
+                                <div class="demo-btn-title">Catch $12K Vendor Overcharge</div>
+                                <div class="demo-btn-subtitle">Watch AI verify every transaction</div>
+                            </div>
+                            <div class="demo-btn-arrow">▶</div>
                         </button>
                     </div>
                 </div>
-                
-                <div class="hero-diagram fade-up delay-3">
-                    <div class="system-flow">
-                        <div class="flow-node" data-step="1">
-                            <div class="node-icon">⚡</div>
-                            <div class="node-label">Input</div>
+
+                <!-- Inline Demo Player -->
+                <div class="hero-demo-player" id="heroDemoPlayer" style="display: none;">
+                    <div class="demo-player-header">
+                        <h4 id="demoPlayerTitle">AI Execution in Progress...</h4>
+                        <button class="demo-close-btn" onclick="closeHeroDemo()">✕</button>
+                    </div>
+                    
+                    <div class="demo-player-content">
+                        <div class="demo-timeline" id="heroTimeline">
+                            <!-- Steps will be added here dynamically -->
                         </div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-node" data-step="2">
-                            <div class="node-icon">🧠</div>
-                            <div class="node-label">AI Engine</div>
+                        
+                        <div class="demo-result" id="heroResult" style="display: none;">
+                            <!-- Result will be added here -->
                         </div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-node" data-step="3">
-                            <div class="node-icon">✓</div>
-                            <div class="node-label">Action</div>
+                    </div>
+
+                    <div class="demo-impact-banner" id="heroImpactBanner" style="display: none;">
+                        <div class="impact-text">
+                            <span class="impact-label">This happens automatically</span>
+                            <span class="impact-value" id="heroImpactValue">12,450 times/month</span>
                         </div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-node" data-step="4">
-                            <div class="node-icon">📋</div>
-                            <div class="node-label">Audit Log</div>
-                        </div>
+                        <button class="btn-primary" onclick="navigateToScreen(2)">
+                            See Full Business Impact →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick nav after watching -->
+                <div class="hero-footer-nav" id="heroFooterNav">
+                    <p class="footer-nav-label">Or explore:</p>
+                    <div class="footer-nav-buttons">
+                        <button class="btn-link" onclick="navigateToScreen(2)">Business Impact Dashboard</button>
+                        <span class="nav-divider">|</span>
+                        <button class="btn-link" onclick="navigateToScreen(4)">Live AI Command Center</button>
                     </div>
                 </div>
             </div>
