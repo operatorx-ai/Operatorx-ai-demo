@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operatorx-AI — AI Operations Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- SCREEN 1: Hero / Landing -->
+    <section id="screen-hero" class="screen active" data-screen="1">
+        <div class="animated-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-headline fade-up">
+                        An AI Operator That Runs<br>
+                        <span class="gradient-text">Financial Operations</span><br>
+                        Autonomously
+                    </h1>
+                    <p class="hero-subheadline fade-up delay-1">
+                        Automate rent, bills, invoices, and payments with governed AI decision-making.
+                    </p>
+                    <div class="hero-cta fade-up delay-2">
+                        <button class="btn-primary" onclick="navigateToScreen(3)">
+                            Launch Live AI Demo
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button class="btn-secondary" onclick="navigateToScreen(10)">
+                            View How It Works
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-diagram fade-up delay-3">
+                    <div class="system-flow">
+                        <div class="flow-node" data-step="1">
+                            <div class="node-icon">⚡</div>
+                            <div class="node-label">Input</div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-node" data-step="2">
+                            <div class="node-icon">🧠</div>
+                            <div class="node-label">AI Engine</div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-node" data-step="3">
+                            <div class="node-icon">✓</div>
+                            <div class="node-label">Action</div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-node" data-step="4">
+                            <div class="node-icon">📋</div>
+                            <div class="node-label">Audit Log</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 2: What Operatorx-AI Is -->
+    <section id="screen-what" class="screen" data-screen="2">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Operatorx-AI Actually Is</h2>
+            </div>
+            
+            <div class="feature-cards">
+                <div class="feature-card fade-up" data-delay="0">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Operator</h3>
+                    <p>Makes decisions, validates actions, executes workflows.</p>
+                </div>
+                
+                <div class="feature-card fade-up" data-delay="100">
+                    <div class="feature-icon">⚖️</div>
+                    <h3>Policy-Driven</h3>
+                    <p>Every action follows rules, thresholds, and approvals.</p>
+                </div>
+                
+                <div class="feature-card fade-up" data-delay="200">
+                    <div class="feature-icon">📊</div>
+                    <h3>Auditable by Design</h3>
+                    <p>Every step logged. No black box.</p>
+                </div>
+            </div>
+            
+            <div class="section-footer">
+                <p class="footer-statement">"This is not automation. This is operational intelligence."</p>
+            </div>
+            
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(1)">← Back</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(3)">Continue →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 3: AI Command Center Entry -->
+    <section id="screen-command" class="screen" data-screen="3">
+        <div class="container-fluid">
+            <div class="command-header">
+                <h2>AI Command Center</h2>
+                <div class="system-status">
+                    <span class="status-dot active"></span>
+                    <span>System Online</span>
+                </div>
+            </div>
+            
+            <div class="command-center">
+                <div class="command-panel left-panel">
+                    <h3>Natural Language Input</h3>
+                    <div class="input-section">
+                        <textarea 
+                            id="aiInput" 
+                            class="ai-input" 
+                            placeholder="Describe what you want the AI to do..."
+                            rows="4"
+                        ></textarea>
+                        
+                        <div class="quick-actions">
+                            <p class="quick-label">Example Commands:</p>
+                            <button class="quick-btn" onclick="loadScenario('rent')">
+                                Pay rent automatically
+                            </button>
+                            <button class="quick-btn" onclick="loadScenario('bills')">
+                                Manage monthly bills
+                            </button>
+                            <button class="quick-btn" onclick="loadScenario('failure')">
+                                Detect failed payments
+                            </button>
+                        </div>
+                        
+                        <button class="btn-execute" id="executeBtn" onclick="executeAI()">
+                            Execute AI Operation
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="command-panel center-panel">
+                    <h3>Execution Timeline</h3>
+                    <div class="timeline-container" id="timeline">
+                        <div class="timeline-empty">
+                            <p>Select a command to begin AI execution</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="command-panel right-panel">
+                    <h3>System Status</h3>
+                    <div class="status-metrics" id="statusMetrics">
+                        <div class="metric">
+                            <div class="metric-label">Active Policies</div>
+                            <div class="metric-value">12</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Risk Level</div>
+                            <div class="metric-value metric-success">LOW</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Auth Status</div>
+                            <div class="metric-value metric-success">VERIFIED</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Operations Today</div>
+                            <div class="metric-value">8</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 4-6: Live Scenario - Rent Automation (Dynamic) -->
+    <section id="screen-scenario" class="screen" data-screen="4">
+        <div class="container">
+            <div class="scenario-header">
+                <button class="back-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <h2 id="scenarioTitle">AI Execution in Progress</h2>
+            </div>
+            
+            <div class="scenario-content" id="scenarioContent">
+                <!-- Dynamic content populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 7: Bill Detection Scenario -->
+    <section id="screen-bills" class="screen" data-screen="7">
+        <div class="container">
+            <div class="scenario-header">
+                <button class="back-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <h2>Bill Detection & Categorization</h2>
+            </div>
+            
+            <div class="bills-demo" id="billsDemo">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 8: Failure Handling -->
+    <section id="screen-failure" class="screen" data-screen="8">
+        <div class="container">
+            <div class="scenario-header">
+                <button class="back-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <h2>Failure Handling & Safety Protocols</h2>
+            </div>
+            
+            <div class="failure-demo" id="failureDemo">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 9: Audit Log -->
+    <section id="screen-audit" class="screen" data-screen="9">
+        <div class="container">
+            <div class="audit-header">
+                <h2>Immutable Audit Trail</h2>
+                <div class="audit-badge">SOC 2 Ready</div>
+            </div>
+            
+            <div class="audit-log">
+                <table class="audit-table" id="auditTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Action</th>
+                            <th>Decision</th>
+                            <th>Policy Applied</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(3)">← Back</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(10)">View Architecture →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 10: Architecture Flow -->
+    <section id="screen-architecture" class="screen" data-screen="10">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Architecture & Governance</h2>
+                <p class="section-subtitle">Every action is governed, traceable, and reversible</p>
+            </div>
+            
+            <div class="architecture-diagram">
+                <div class="arch-stage fade-in-sequence" data-delay="0">
+                    <div class="arch-node">
+                        <div class="arch-icon">📥</div>
+                        <h3>User Input</h3>
+                        <p>Natural language commands</p>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                </div>
+                
+                <div class="arch-stage fade-in-sequence" data-delay="100">
+                    <div class="arch-node">
+                        <div class="arch-icon">⚖️</div>
+                        <h3>Policy Engine</h3>
+                        <p>Validates against rules & thresholds</p>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                </div>
+                
+                <div class="arch-stage fade-in-sequence" data-delay="200">
+                    <div class="arch-node">
+                        <div class="arch-icon">🧠</div>
+                        <h3>AI Decision Layer</h3>
+                        <p>Analyzes context & makes determination</p>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                </div>
+                
+                <div class="arch-stage fade-in-sequence" data-delay="300">
+                    <div class="arch-node">
+                        <div class="arch-icon">⚡</div>
+                        <h3>Execution Engine</h3>
+                        <p>Performs authorized actions</p>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                </div>
+                
+                <div class="arch-stage fade-in-sequence" data-delay="400">
+                    <div class="arch-node">
+                        <div class="arch-icon">📋</div>
+                        <h3>Immutable Audit Log</h3>
+                        <p>Records every decision & action</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(9)">← Back</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(11)">View Use Cases →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 11: Use Cases by Tier -->
+    <section id="screen-usecases" class="screen" data-screen="11">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built for Everyone</h2>
+                <p class="section-subtitle">From individuals to enterprises to government</p>
+            </div>
+            
+            <div class="tier-grid">
+                <div class="tier-card fade-up" data-delay="0">
+                    <div class="tier-header">
+                        <div class="tier-icon">👤</div>
+                        <h3>Personal</h3>
+                    </div>
+                    <div class="tier-content">
+                        <h4>Example Workflows:</h4>
+                        <ul>
+                            <li>Automatic rent payments</li>
+                            <li>Bill detection & payment</li>
+                            <li>Subscription management</li>
+                            <li>Budget monitoring</li>
+                        </ul>
+                        <h4>Control Level:</h4>
+                        <p>Full autonomy with threshold alerts</p>
+                        <h4>Approval Logic:</h4>
+                        <p>One-time setup, automatic execution</p>
+                    </div>
+                </div>
+                
+                <div class="tier-card featured fade-up" data-delay="100">
+                    <div class="tier-badge">Most Popular</div>
+                    <div class="tier-header">
+                        <div class="tier-icon">🏢</div>
+                        <h3>Business</h3>
+                    </div>
+                    <div class="tier-content">
+                        <h4>Example Workflows:</h4>
+                        <ul>
+                            <li>Invoice reconciliation</li>
+                            <li>Vendor payment automation</li>
+                            <li>Multi-entity accounting</li>
+                            <li>Cash flow optimization</li>
+                        </ul>
+                        <h4>Control Level:</h4>
+                        <p>Role-based approval workflows</p>
+                        <h4>Approval Logic:</h4>
+                        <p>Tiered authorization by amount</p>
+                    </div>
+                </div>
+                
+                <div class="tier-card fade-up" data-delay="200">
+                    <div class="tier-header">
+                        <div class="tier-icon">🏛️</div>
+                        <h3>Government</h3>
+                    </div>
+                    <div class="tier-content">
+                        <h4>Example Workflows:</h4>
+                        <ul>
+                            <li>Grant disbursement</li>
+                            <li>Procurement automation</li>
+                            <li>Compliance validation</li>
+                            <li>Audit trail generation</li>
+                        </ul>
+                        <h4>Control Level:</h4>
+                        <p>Full audit + multi-party approval</p>
+                        <h4>Approval Logic:</h4>
+                        <p>Chain of custody with signing</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(10)">← Back</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(12)">Final CTA →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 12: Final CTA -->
+    <section id="screen-cta" class="screen" data-screen="12">
+        <div class="container cta-container">
+            <div class="cta-content">
+                <h2 class="cta-headline">Ready to Let AI Run Operations — Safely?</h2>
+                <p class="cta-subheadline">
+                    Join forward-thinking organizations using governed AI to automate financial operations
+                </p>
+                
+                <div class="cta-buttons">
+                    <button class="btn-primary btn-large" onclick="window.open('mailto:demo@operatorx-ai.com', '_blank')">
+                        Request Enterprise Demo
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="navigateToScreen(10)">
+                        View Governance Model
+                    </button>
+                </div>
+                
+                <div class="cta-footer">
+                    <p>Trusted by businesses that demand security, compliance, and control</p>
+                    <div class="trust-badges">
+                        <div class="badge">SOC 2 Type II</div>
+                        <div class="badge">GDPR Compliant</div>
+                        <div class="badge">256-bit Encryption</div>
+                    </div>
+                </div>
+                
+                <div class="demo-reset">
+                    <button class="nav-btn" onclick="navigateToScreen(1)">← Return to Start</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

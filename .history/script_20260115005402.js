@@ -27,53 +27,7 @@ const industryContent = {
             { text: "Schedule maintenance invoices", scenario: "scenario3" }
         ],
         finalCTA: "AI Built for Property Management Operations",
-        finalCTAButton: "Request Property Management Demo",
-        // ROI Dashboard Data
-        dashboardSubtitle: "Real-world results from property management operations",
-        roiMetrics: [
-            { icon: "💰", value: "$127,000", label: "Monthly Cost Savings", detail: "vs. manual processing" },
-            { icon: "⏱️", value: "340 hrs", label: "Time Reclaimed", detail: "per month" },
-            { icon: "🎯", value: "98%", label: "Rent Collection Rate", detail: "87% manual baseline" },
-            { icon: "📈", value: "12,450", label: "Operations Processed", detail: "this month" }
-        ],
-        beforeAfter: {
-            before: [
-                "⏰ 5 days to process monthly invoices",
-                "👥 2 full-time property managers",
-                "❌ 13% late payment rate",
-                "📊 Weekly manual reconciliation",
-                "🐌 87% rent collection rate"
-            ],
-            beforeCost: "$18,400",
-            after: [
-                "⚡ 4 hours to process monthly invoices",
-                "🤖 0 manual intervention needed",
-                "✅ 2% late payment rate (auto-reminders)",
-                "🎯 Real-time continuous reconciliation",
-                "⚡ 98% rent collection rate"
-            ],
-            afterCost: "$4,200"
-        },
-        businessOutcomes: [
-            {
-                icon: "🛡️",
-                title: "Prevented $45,000 Duplicate Payment",
-                description: "AI detected maintenance invoice already paid under different reference number",
-                badge: "Risk Prevention"
-            },
-            {
-                icon: "🔍",
-                title: "Caught $12,300 Vendor Overcharge",
-                description: "Automatically identified pricing discrepancy in recurring vendor contract",
-                badge: "Cost Recovery"
-            },
-            {
-                icon: "⚡",
-                title: "98% Collection Rate Achieved",
-                description: "Automated reminders and smart scheduling increased collection by 11%",
-                badge: "Revenue Optimization"
-            }
-        ]
+        finalCTAButton: "Request Property Management Demo"
     },
     medical: {
         name: "Medical Practice",
@@ -91,53 +45,7 @@ const industryContent = {
             { text: "Monitor subscription services", scenario: "scenario3" }
         ],
         finalCTA: "AI Built for Medical Practice Operations",
-        finalCTAButton: "Request Medical Practice Demo",
-        // ROI Dashboard Data
-        dashboardSubtitle: "Real-world results from medical practice operations",
-        roiMetrics: [
-            { icon: "💰", value: "$94,500", label: "Monthly Cost Savings", detail: "vs. manual processing" },
-            { icon: "⏱️", value: "280 hrs", label: "Time Reclaimed", detail: "per month" },
-            { icon: "🎯", value: "14 days", label: "Faster Claims Processing", detail: "from 28 to 14 days" },
-            { icon: "📈", value: "8,750", label: "Claims Processed", detail: "this month" }
-        ],
-        beforeAfter: {
-            before: [
-                "⏰ 28 days average claim processing",
-                "👥 3 full-time billing specialists",
-                "❌ 22% claim rejection rate",
-                "📊 Manual insurance verification",
-                "🐌 12-day payment cycles"
-            ],
-            beforeCost: "$22,800",
-            after: [
-                "⚡ 14 days average claim processing",
-                "🤖 Automated billing validation",
-                "✅ 8% claim rejection rate",
-                "🎯 Real-time insurance verification",
-                "⚡ 5-day payment cycles"
-            ],
-            afterCost: "$7,300"
-        },
-        businessOutcomes: [
-            {
-                icon: "🛡️",
-                title: "Reduced Claim Denials 64%",
-                description: "AI pre-validation caught coding errors before submission",
-                badge: "Revenue Protection"
-            },
-            {
-                icon: "🔍",
-                title: "Recovered $87,000 in Lost Revenue",
-                description: "Identified and resubmitted improperly denied claims automatically",
-                badge: "Revenue Recovery"
-            },
-            {
-                icon: "⚡",
-                title: "Cut Processing Time 50%",
-                description: "Claims now processed in 14 days vs 28 days manually",
-                badge: "Efficiency Gain"
-            }
-        ]
+        finalCTAButton: "Request Medical Practice Demo"
     },
     logistics: {
         name: "Logistics",
@@ -1255,123 +1163,9 @@ function switchOrganization(orgType) {
         ctaMicro.textContent = content.ctaMicro;
     }
     
-    // Update Executive Dashboard (Screen 2)
-    updateDashboard(content);
-    
-    // Update Screen 3 (What It Does)
+    // Update Screen 2
     const screen2Header = document.querySelector('.section-title');
     if (screen2Header) {
-        screen2Header.textContent = content.screen2Header;
-    }
-    
-    const featureCards = document.querySelectorAll('.feature-card p:first-of-type');
-    if (featureCards.length >= 2) {
-        featureCards[0].textContent = content.card1Desc;
-        featureCards[1].textContent = content.card2Desc;
-    }
-    
-    // Update Screen 4 (Command Center)
-    const commandHeader = document.querySelector('.command-header h2');
-    if (commandHeader) {
-        commandHeader.textContent = content.screen3Header;
-    }
-    
-    const inputPlaceholder = document.getElementById('aiInput');
-    if (inputPlaceholder) {
-        inputPlaceholder.placeholder = content.inputPlaceholder;
-    }
-    
-    // Update Quick Actions
-    const quickActionsContainer = document.querySelector('.quick-actions');
-    if (quickActionsContainer) {
-        quickActionsContainer.innerHTML = `
-            <p class="quick-label">Quick Start:</p>
-            ${content.quickActions.map(action => `
-                <button class="quick-btn" onclick="loadScenario('${action.scenario}')">
-                    ${action.text}
-                </button>
-            `).join('')}
-            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem; font-style: italic;">These are simulated enterprise workflows.</p>
-        `;
-    }
-    
-    console.log(`✓ Switched to ${content.name} organization`);
-}
-
-// ===== UPDATE DASHBOARD =====
-function updateDashboard(content) {
-    if (!content.roiMetrics) return;
-    
-    // Update dashboard subtitle
-    const dashboardSubtitle = document.querySelector('[data-dynamic="dashboard-subtitle"]');
-    if (dashboardSubtitle) {
-        dashboardSubtitle.textContent = content.dashboardSubtitle;
-    }
-    
-    // Update ROI metrics
-    const roiContainer = document.querySelector('[data-dynamic-container="roi-metrics"]');
-    if (roiContainer && content.roiMetrics) {
-        roiContainer.innerHTML = content.roiMetrics.map((metric, index) => {
-            const types = ['primary', 'success', 'warning', 'info'];
-            return `
-                <div class="roi-card ${types[index % 4]}">
-                    <div class="roi-icon">${metric.icon}</div>
-                    <div class="roi-value">${metric.value}</div>
-                    <div class="roi-label">${metric.label}</div>
-                    <div class="roi-detail">${metric.detail}</div>
-                </div>
-            `;
-        }).join('');
-    }
-    
-    // Update Before/After comparison
-    const beforeAfterContainer = document.querySelector('[data-dynamic-container="before-after"]');
-    if (beforeAfterContainer && content.beforeAfter) {
-        beforeAfterContainer.innerHTML = `
-            <div class="comparison-card before">
-                <div class="comparison-badge before">Before</div>
-                <h4>Manual Operations</h4>
-                <ul class="comparison-list">
-                    ${content.beforeAfter.before.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                <div class="cost-indicator before">
-                    <span class="cost-label">Monthly Cost:</span>
-                    <span class="cost-value">${content.beforeAfter.beforeCost}</span>
-                </div>
-            </div>
-            
-            <div class="transformation-arrow">
-                <div class="arrow-icon">→</div>
-                <div class="arrow-label">With Operatorx-AI</div>
-            </div>
-            
-            <div class="comparison-card after">
-                <div class="comparison-badge after">After</div>
-                <h4>AI-Powered Operations</h4>
-                <ul class="comparison-list">
-                    ${content.beforeAfter.after.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                <div class="cost-indicator after">
-                    <span class="cost-label">Monthly Cost:</span>
-                    <span class="cost-value">${content.beforeAfter.afterCost}</span>
-                </div>
-            </div>
-        `;
-    }
-    
-    // Update Business Outcomes
-    const outcomesContainer = document.querySelector('[data-dynamic-container="business-outcomes"]');
-    if (outcomesContainer && content.businessOutcomes) {
-        outcomesContainer.innerHTML = content.businessOutcomes.map(outcome => `
-            <div class="outcome-card">
-                <div class="outcome-icon">${outcome.icon}</div>
-                <h4>${outcome.title}</h4>
-                <p>${outcome.description}</p>
-                <span class="outcome-badge">${outcome.badge}</span>
-            </div>
-        `).join('');
-    }
-}
         screen2Header.textContent = content.screen2Header;
     }
     

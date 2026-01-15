@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operatorx-AI | Enterprise AI Operations Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-grid"></div>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    
+    <!-- SCREEN 1: Hero / Landing -->
+    <section id="hero" class="screen active">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Enterprise AI Operator</div>
+                <h1 class="hero-headline">
+                    An AI Operator That Runs<br/>
+                    <span class="gradient-text">Financial Operations</span><br/>
+                    Autonomously
+                </h1>
+                <p class="hero-subhead">
+                    Automate rent, bills, invoices, and payments with governed AI decision-making.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="navigateToScreen('ai-console')">
+                        Launch Live AI Demo
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="navigateToScreen('what-it-is')">
+                        View How It Works
+                    </button>
+                </div>
+            </div>
+            <div class="hero-diagram">
+                <div class="diagram-node" data-node="input">
+                    <div class="node-icon">📥</div>
+                    <div class="node-label">Input</div>
+                </div>
+                <div class="diagram-arrow"></div>
+                <div class="diagram-node" data-node="ai">
+                    <div class="node-icon">🧠</div>
+                    <div class="node-label">AI Engine</div>
+                </div>
+                <div class="diagram-arrow"></div>
+                <div class="diagram-node" data-node="action">
+                    <div class="node-icon">⚡</div>
+                    <div class="node-label">Action</div>
+                </div>
+                <div class="diagram-arrow"></div>
+                <div class="diagram-node" data-node="log">
+                    <div class="node-icon">📋</div>
+                    <div class="node-label">Audit Log</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="navigateToScreen('what-it-is')">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- SCREEN 2: What Operatorx-AI Is -->
+    <section id="what-it-is" class="screen">
+        <div class="container">
+            <h2 class="section-title">What Operatorx-AI Actually Is</h2>
+            <div class="cards-grid">
+                <div class="feature-card">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI Operator</h3>
+                    <p>Makes decisions, validates actions, executes workflows.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Policy-Driven</h3>
+                    <p>Every action follows rules, thresholds, and approvals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Auditable by Design</h3>
+                    <p>Every step logged. No black box.</p>
+                </div>
+            </div>
+            <div class="section-footer">
+                <p class="emphasis-text">This is not automation. This is operational intelligence.</p>
+            </div>
+            <button class="btn btn-primary center-btn" onclick="navigateToScreen('ai-console')">
+                See It In Action
+            </button>
+        </div>
+    </section>
+
+    <!-- SCREEN 3: AI Command Center -->
+    <section id="ai-console" class="screen">
+        <div class="container-fluid">
+            <div class="console-header">
+                <h2>AI Command Center</h2>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    System Active
+                </div>
+            </div>
+            
+            <div class="console-layout">
+                <div class="console-panel console-input">
+                    <h3>Natural Language Input</h3>
+                    <textarea id="aiInput" placeholder="Describe what you want the AI to do..."></textarea>
+                    <div class="example-commands">
+                        <p>Quick examples:</p>
+                        <button class="example-btn" onclick="loadScenario('rent')">Pay rent automatically</button>
+                        <button class="example-btn" onclick="loadScenario('bills')">Manage monthly bills</button>
+                        <button class="example-btn" onclick="loadScenario('failure')">Detect failed payments</button>
+                    </div>
+                    <button class="btn btn-primary btn-execute" id="executeBtn" onclick="executeAI()">
+                        Execute
+                    </button>
+                </div>
+                
+                <div class="console-panel console-timeline" id="executionTimeline">
+                    <h3>Execution Timeline</h3>
+                    <div class="timeline-empty">
+                        <p>Select a scenario or enter your own command to see AI reasoning</p>
+                    </div>
+                </div>
+                
+                <div class="console-panel console-status">
+                    <h3>System Status</h3>
+                    <div class="status-item">
+                        <span class="status-label">Policy Engine</span>
+                        <span class="status-value active">Active</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Decision Layer</span>
+                        <span class="status-value active">Ready</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Execution Engine</span>
+                        <span class="status-value active">Standby</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Audit Logger</span>
+                        <span class="status-value active">Recording</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 4-6: Scenario Execution (Dynamic) -->
+    <section id="scenario-execution" class="screen" style="display: none;">
+        <div class="container">
+            <div class="scenario-header">
+                <h2 id="scenarioTitle">Live Scenario: Rent Automation</h2>
+                <button class="btn btn-ghost" onclick="navigateToScreen('ai-console')">← Back to Console</button>
+            </div>
+            <div class="scenario-result" id="scenarioResult"></div>
+        </div>
+    </section>
+
+    <!-- SCREEN 9: Audit Log -->
+    <section id="audit-log" class="screen">
+        <div class="container">
+            <h2 class="section-title">Audit Log</h2>
+            <div class="audit-badge">SOC-ready audit trail</div>
+            <div class="audit-table-container">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Action</th>
+                            <th>Decision</th>
+                            <th>Policy Applied</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                        <tr>
+                            <td>2026-01-15 09:02:14</td>
+                            <td>Rent Payment</td>
+                            <td><span class="badge badge-success">Approved</span></td>
+                            <td>Balance ≥ $2,000</td>
+                            <td><span class="badge badge-info">Scheduled</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-15 08:45:31</td>
+                            <td>Bill Detection</td>
+                            <td><span class="badge badge-success">Approved</span></td>
+                            <td>Auto-categorize enabled</td>
+                            <td><span class="badge badge-success">Processed</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-15 08:30:12</td>
+                            <td>Payment Execution</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td>Manual approval required</td>
+                            <td><span class="badge badge-warning">Awaiting</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-primary center-btn" onclick="navigateToScreen('architecture')">
+                View System Architecture
+            </button>
+        </div>
+    </section>
+
+    <!-- SCREEN 10: Architecture Flow -->
+    <section id="architecture" class="screen">
+        <div class="container">
+            <h2 class="section-title">System Architecture</h2>
+            <div class="architecture-diagram">
+                <div class="arch-node">
+                    <div class="arch-icon">👤</div>
+                    <div class="arch-label">User Input</div>
+                </div>
+                <div class="arch-flow">↓</div>
+                <div class="arch-node highlight">
+                    <div class="arch-icon">🛡️</div>
+                    <div class="arch-label">Policy Engine</div>
+                </div>
+                <div class="arch-flow">↓</div>
+                <div class="arch-node highlight">
+                    <div class="arch-icon">🧠</div>
+                    <div class="arch-label">AI Decision Layer</div>
+                </div>
+                <div class="arch-flow">↓</div>
+                <div class="arch-node">
+                    <div class="arch-icon">⚡</div>
+                    <div class="arch-label">Execution Engine</div>
+                </div>
+                <div class="arch-flow">↓</div>
+                <div class="arch-node">
+                    <div class="arch-icon">🔒</div>
+                    <div class="arch-label">Immutable Audit Log</div>
+                </div>
+            </div>
+            <p class="architecture-caption">Every action is governed, traceable, and reversible.</p>
+            <button class="btn btn-primary center-btn" onclick="navigateToScreen('use-cases')">
+                Explore Use Cases
+            </button>
+        </div>
+    </section>
+
+    <!-- SCREEN 11: Use Cases -->
+    <section id="use-cases" class="screen">
+        <div class="container">
+            <h2 class="section-title">Use Cases by Tier</h2>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-icon">👤</div>
+                        <h3>Personal</h3>
+                    </div>
+                    <ul class="use-case-list">
+                        <li>Automated rent payments</li>
+                        <li>Bill management & tracking</li>
+                        <li>Subscription oversight</li>
+                        <li>Personal finance automation</li>
+                    </ul>
+                    <div class="use-case-control">
+                        <span class="control-badge">Self-managed policies</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card featured">
+                    <div class="use-case-header">
+                        <div class="use-case-icon">🏢</div>
+                        <h3>Business</h3>
+                    </div>
+                    <ul class="use-case-list">
+                        <li>Invoice & payment processing</li>
+                        <li>Vendor management</li>
+                        <li>Payroll automation</li>
+                        <li>Multi-approval workflows</li>
+                        <li>Team expense management</li>
+                    </ul>
+                    <div class="use-case-control">
+                        <span class="control-badge">Role-based approvals</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-icon">🏛️</div>
+                        <h3>Government</h3>
+                    </div>
+                    <ul class="use-case-list">
+                        <li>Grant disbursements</li>
+                        <li>Procurement automation</li>
+                        <li>Compliance monitoring</li>
+                        <li>Budget execution</li>
+                        <li>Full audit trails</li>
+                    </ul>
+                    <div class="use-case-control">
+                        <span class="control-badge">Multi-layer governance</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary center-btn" onclick="navigateToScreen('final-cta')">
+                Get Started
+            </button>
+        </div>
+    </section>
+
+    <!-- SCREEN 12: Final CTA -->
+    <section id="final-cta" class="screen">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-headline">Ready to Let AI Run Operations — Safely?</h2>
+                <p class="cta-subhead">Join enterprises, businesses, and government agencies using governed AI to automate critical financial workflows.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-lg">
+                        Request Enterprise Demo
+                    </button>
+                    <button class="btn btn-secondary btn-lg">
+                        View Governance Model
+                    </button>
+                </div>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <span class="check">✓</span>
+                        <span>SOC 2 Type II Compliant</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="check">✓</span>
+                        <span>Full Audit Trails</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="check">✓</span>
+                        <span>Policy-Driven AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <span class="logo-icon">⚡</span>
+            Operatorx-AI
+        </div>
+        <div class="nav-links">
+            <a href="#hero" onclick="navigateToScreen('hero')">Home</a>
+            <a href="#what-it-is" onclick="navigateToScreen('what-it-is')">Product</a>
+            <a href="#ai-console" onclick="navigateToScreen('ai-console')">Live Demo</a>
+            <a href="#use-cases" onclick="navigateToScreen('use-cases')">Use Cases</a>
+            <a href="#final-cta" onclick="navigateToScreen('final-cta')">Contact</a>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

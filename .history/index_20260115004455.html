@@ -49,8 +49,8 @@
                     </p>
                     <div class="hero-cta fade-up delay-2">
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <button class="btn-primary" onclick="navigateToScreen(2)">
-                                See Business Impact
+                            <button class="btn-primary" onclick="navigateToScreen(3)">
+                                Launch Live AI Demo
                                 <span class="btn-arrow">→</span>
                             </button>
                             <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin: 0;" data-dynamic="cta-micro">Simulated enterprise environment for property management workflows.</p>
@@ -88,151 +88,8 @@
         </div>
     </section>
 
-    <!-- SCREEN 2: Executive Dashboard - Business Impact -->
-    <section id="screen-dashboard" class="screen" data-screen="2">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Business Impact Dashboard</h2>
-                <p style="font-size: 1.125rem; color: var(--color-text-secondary); max-width: 800px; margin: 1rem auto 0;" data-dynamic="dashboard-subtitle">Real-world results from property management operations</p>
-            </div>
-
-            <!-- ROI Metrics Grid -->
-            <div class="roi-grid" data-dynamic-container="roi-metrics">
-                <div class="roi-card primary">
-                    <div class="roi-icon">💰</div>
-                    <div class="roi-value">$127,000</div>
-                    <div class="roi-label">Monthly Cost Savings</div>
-                    <div class="roi-detail">vs. manual processing</div>
-                </div>
-                
-                <div class="roi-card success">
-                    <div class="roi-icon">⏱️</div>
-                    <div class="roi-value">340 hrs</div>
-                    <div class="roi-label">Time Reclaimed</div>
-                    <div class="roi-detail">per month</div>
-                </div>
-                
-                <div class="roi-card warning">
-                    <div class="roi-icon">🎯</div>
-                    <div class="roi-value">99.2%</div>
-                    <div class="roi-label">Accuracy Rate</div>
-                    <div class="roi-detail">87% manual baseline</div>
-                </div>
-                
-                <div class="roi-card info">
-                    <div class="roi-icon">📈</div>
-                    <div class="roi-value">12,450</div>
-                    <div class="roi-label">Operations Processed</div>
-                    <div class="roi-detail">this month</div>
-                </div>
-            </div>
-
-            <!-- Before/After Comparison -->
-            <div class="transformation-section">
-                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.75rem;">The Transformation</h3>
-                <div class="before-after-grid" data-dynamic-container="before-after">
-                    <div class="comparison-card before">
-                        <div class="comparison-badge">Before</div>
-                        <h4>Manual Operations</h4>
-                        <ul class="comparison-list">
-                            <li>⏰ 5 days to process monthly invoices</li>
-                            <li>👥 2 full-time accountants required</li>
-                            <li>❌ 13% error rate on data entry</li>
-                            <li>📊 Weekly reconciliation meetings</li>
-                            <li>🐌 5-day month-end close</li>
-                        </ul>
-                        <div class="cost-indicator before">
-                            <span class="cost-label">Monthly Cost:</span>
-                            <span class="cost-value">$18,400</span>
-                        </div>
-                    </div>
-                    
-                    <div class="transformation-arrow">
-                        <div class="arrow-icon">→</div>
-                        <div class="arrow-label">With Operatorx-AI</div>
-                    </div>
-                    
-                    <div class="comparison-card after">
-                        <div class="comparison-badge after">After</div>
-                        <h4>AI-Powered Operations</h4>
-                        <ul class="comparison-list">
-                            <li>⚡ 4 hours to process monthly invoices</li>
-                            <li>🤖 0 manual intervention needed</li>
-                            <li>✅ 99.2% accuracy with AI validation</li>
-                            <li>🎯 Real-time continuous reconciliation</li>
-                            <li>⚡ 6-hour month-end close</li>
-                        </ul>
-                        <div class="cost-indicator after">
-                            <span class="cost-label">Monthly Cost:</span>
-                            <span class="cost-value">$4,200</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Real Business Outcomes -->
-            <div class="business-outcomes">
-                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.75rem;">Proven Business Outcomes</h3>
-                <div class="outcomes-grid" data-dynamic-container="business-outcomes">
-                    <div class="outcome-card">
-                        <div class="outcome-icon">🛡️</div>
-                        <h4>Prevented $45,000 Duplicate Payment</h4>
-                        <p>AI detected vendor invoice already paid under different reference number</p>
-                        <span class="outcome-badge">Risk Prevention</span>
-                    </div>
-                    
-                    <div class="outcome-card">
-                        <div class="outcome-icon">🔍</div>
-                        <h4>Caught $12,300 Overcharge</h4>
-                        <p>Automatically identified pricing discrepancy in recurring vendor contract</p>
-                        <span class="outcome-badge">Cost Recovery</span>
-                    </div>
-                    
-                    <div class="outcome-card">
-                        <div class="outcome-icon">⚡</div>
-                        <h4>Reduced Close Time 80%</h4>
-                        <p>Month-end reconciliation dropped from 5 days to 6 hours</p>
-                        <span class="outcome-badge">Efficiency Gain</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Impact -->
-            <div class="team-impact">
-                <h3 style="text-align: center; margin-bottom: 1.5rem; font-size: 1.75rem;">What Your Team Gains</h3>
-                <div class="impact-statement">
-                    <div class="impact-quote">
-                        <p style="font-size: 1.25rem; line-height: 1.6; color: var(--color-text-secondary);">
-                            "Same 3-person finance team. <span style="color: var(--color-accent-success); font-weight: var(--font-weight-bold);">10x operational output.</span> 
-                            Team now focuses on strategy instead of data entry."
-                        </p>
-                    </div>
-                    <div class="impact-metrics-inline">
-                        <div class="inline-metric">
-                            <span class="metric-number">340</span>
-                            <span class="metric-label">hours/month freed up</span>
-                        </div>
-                        <div class="inline-metric">
-                            <span class="metric-number">0</span>
-                            <span class="metric-label">new hires needed</span>
-                        </div>
-                        <div class="inline-metric">
-                            <span class="metric-number">10x</span>
-                            <span class="metric-label">volume increase</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="screen-nav" style="margin-top: 3rem;">
-                <button class="nav-btn" onclick="navigateToScreen(1)">← Back</button>
-                <button class="nav-btn btn-primary" onclick="navigateToScreen(3)">See It In Action →</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- SCREEN 3: What Operatorx-AI Is -->
-    <section id="screen-what" class="screen" data-screen="3">
+    <!-- SCREEN 2: What Operatorx-AI Is -->
+    <section id="screen-what" class="screen" data-screen="2">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-dynamic="screen2-header">What Operatorx-AI Does for Property Management</h2>
@@ -267,14 +124,14 @@
             </div>
             
             <div class="screen-nav">
-                <button class="nav-btn" onclick="navigateToScreen(2)">← Back</button>
-                <button class="nav-btn btn-primary" onclick="navigateToScreen(4)">Continue →</button>
+                <button class="nav-btn" onclick="navigateToScreen(1)">← Back</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(3)">Continue →</button>
             </div>
         </div>
     </section>
 
-    <!-- SCREEN 4: AI Command Center Entry -->
-    <section id="screen-command" class="screen" data-screen="4">
+    <!-- SCREEN 3: AI Command Center Entry -->
+    <section id="screen-command" class="screen" data-screen="3">
         <div class="container-fluid">
             <div class="command-header">
                 <div>
