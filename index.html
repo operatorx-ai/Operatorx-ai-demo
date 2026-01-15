@@ -10,6 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Global Organization Selector -->
+    <div class="org-selector-bar">
+        <div class="org-selector-container">
+            <label class="org-label">Active Organization</label>
+            <div class="org-dropdown">
+                <select id="orgSelector" class="org-select">
+                    <option value="property">Residential Property Management</option>
+                    <option value="medical">Medical / Dental Practice</option>
+                    <option value="logistics">Logistics & Transportation</option>
+                    <option value="retail">Retail / Franchise</option>
+                    <option value="government">Government / Public Sector</option>
+                </select>
+            </div>
+            <p class="org-micro-text">Demo behavior updates per organization type.</p>
+        </div>
+    </div>
+
     <!-- SCREEN 1: Hero / Landing -->
     <section id="screen-hero" class="screen active" data-screen="1">
         <div class="animated-background">
@@ -21,16 +38,14 @@
         <div class="container hero-container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-headline fade-up">
-                        An AI Operator That Runs<br>
-                        <span class="gradient-text">Financial Operations</span><br>
-                        Autonomously
+                    <h1 class="hero-headline fade-up" data-dynamic="hero-headline">
+                        An AI Operator Built for <span data-dynamic="industry-name">Property Management</span> Operations
                     </h1>
-                    <p class="hero-subheadline fade-up delay-1">
-                        Automate rent, bills, invoices, and recurring payments with governed AI decision-making.
+                    <p class="hero-subheadline fade-up delay-1" data-dynamic="hero-subheadline">
+                        Autonomously manage rent collection, tenant payments, and maintenance invoices with policy-driven AI execution.
                     </p>
                     <p class="hero-supporting fade-up delay-1" style="font-size: 0.875rem; color: var(--color-text-tertiary); margin-top: -1rem; margin-bottom: 2rem; max-width: 600px;">
-                        Designed for individuals, businesses, and institutions that require precision, control, and auditability.
+                        Designed for organizations that require accuracy, control, and accountability.
                     </p>
                     <div class="hero-cta fade-up delay-2">
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -38,7 +53,7 @@
                                 Launch Live AI Demo
                                 <span class="btn-arrow">→</span>
                             </button>
-                            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin: 0;">No setup required. Simulated enterprise environment.</p>
+                            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin: 0;" data-dynamic="cta-micro">Simulated enterprise environment for property management workflows.</p>
                         </div>
                         <button class="btn-secondary" onclick="navigateToScreen(10)">
                             View How It Works
@@ -77,30 +92,30 @@
     <section id="screen-what" class="screen" data-screen="2">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">What Operatorx-AI Actually Does</h2>
-                <p style="font-size: 1.125rem; color: var(--color-text-secondary); max-width: 800px; margin: 1rem auto 0;">Operatorx-AI is an AI operations layer that executes financial workflows while enforcing policies, validating risk, and logging every decision.</p>
+                <h2 class="section-title" data-dynamic="screen2-header">What Operatorx-AI Does for Property Management</h2>
+                <p style="font-size: 1.125rem; color: var(--color-text-secondary); max-width: 800px; margin: 1rem auto 0;">Operatorx-AI executes operational workflows while enforcing policies, validating risk, and generating audit logs in real time.</p>
             </div>
             
             <div class="feature-cards">
                 <div class="feature-card fade-up" data-delay="0">
                     <div class="feature-icon">🤖</div>
                     <h3>AI Operator</h3>
-                    <p>Interprets intent, evaluates conditions, and executes actions autonomously.</p>
-                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">Not a chatbot. Not a script.</p>
+                    <p data-dynamic="card1-desc">Interprets intent and executes property management operations autonomously.</p>
+                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">Built for real operations.</p>
                 </div>
                 
                 <div class="feature-card fade-up" data-delay="100">
                     <div class="feature-icon">⚖️</div>
                     <h3>Policy-Driven Control</h3>
-                    <p>Every action follows predefined rules, thresholds, and approval logic.</p>
-                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">No action without validation.</p>
+                    <p data-dynamic="card2-desc">Every action follows property management rules and thresholds.</p>
+                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">Compliance first.</p>
                 </div>
                 
                 <div class="feature-card fade-up" data-delay="200">
                     <div class="feature-icon">📊</div>
-                    <h3>Full Audit Trail</h3>
-                    <p>Every decision is recorded, timestamped, and reviewable.</p>
-                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">Built for compliance and trust.</p>
+                    <h3>Auditable by Design</h3>
+                    <p>All decisions are logged for internal review and external audits.</p>
+                    <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 1rem; font-style: italic;">Trust by default.</p>
                 </div>
             </div>
             
@@ -120,8 +135,8 @@
         <div class="container-fluid">
             <div class="command-header">
                 <div>
-                    <h2>AI Command Center</h2>
-                    <p style="font-size: 1rem; color: var(--color-text-secondary); margin-top: 0.5rem;">Issue high-level instructions. Operatorx-AI handles execution.</p>
+                    <h2 data-dynamic="screen3-header">AI Command Center — Property Management Mode</h2>
+                    <p style="font-size: 1rem; color: var(--color-text-secondary); margin-top: 0.5rem;">Issue operational instructions in natural language.</p>
                 </div>
                 <div class="system-status">
                     <span class="status-dot active"></span>
@@ -136,21 +151,22 @@
                         <textarea 
                             id="aiInput" 
                             class="ai-input" 
-                            placeholder="Describe the operation you want the AI to manage…"
+                            placeholder="Describe the property management operation you want the AI to manage…"
                             rows="4"
+                            data-dynamic="input-placeholder"
                         ></textarea>
-                        <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem;">Natural language supported. Policies are enforced automatically.</p>
+                        <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem;">AI enforces organizational policies automatically.</p>
                         
-                        <div class="quick-actions">
+                        <div class="quick-actions" data-dynamic-container="quick-actions">
                             <p class="quick-label">Quick Start:</p>
-                            <button class="quick-btn" onclick="loadScenario('rent')">
-                                Automate rent payments
+                            <button class="quick-btn" onclick="loadScenario('scenario1')">
+                                Automate rent collection
                             </button>
-                            <button class="quick-btn" onclick="loadScenario('bills')">
-                                Manage monthly bills
+                            <button class="quick-btn" onclick="loadScenario('scenario2')">
+                                Handle late payments
                             </button>
-                            <button class="quick-btn" onclick="loadScenario('failure')">
-                                Detect and handle failed transactions
+                            <button class="quick-btn" onclick="loadScenario('scenario3')">
+                                Schedule maintenance invoices
                             </button>
                             <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem; font-style: italic;">These are simulated enterprise workflows.</p>
                         </div>

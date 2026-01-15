@@ -84,11 +84,87 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: 80px; /* Account for fixed org selector */
+}
+
+/* ===== ORGANIZATION SELECTOR BAR ===== */
+.org-selector-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-elevated);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 2rem;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.org-selector-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.org-label {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.org-dropdown {
+    flex: 0 0 auto;
+}
+
+.org-select {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23a8a8b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    min-width: 280px;
+}
+
+.org-select:hover {
+    border-color: var(--color-border-hover);
+    background-color: var(--color-bg-secondary);
+}
+
+.org-select:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.org-select option {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    padding: 0.5rem;
+}
+
+.org-micro-text {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    font-style: italic;
+    margin: 0;
 }
 
 /* ===== SCREEN MANAGEMENT ===== */
 .screen {
-    min-height: 100vh;
+    min-height: calc(100vh - 80px);
     width: 100%;
     display: none;
     opacity: 0;

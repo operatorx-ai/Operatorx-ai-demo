@@ -7,8 +7,667 @@
 let currentScreen = 1;
 let isExecuting = false;
 const auditLog = [];
+let currentOrg = 'property'; // Default organization
 
-// ===== SCENARIO DATA =====
+// ===== INDUSTRY-SPECIFIC CONTENT =====
+const industryContent = {
+    property: {
+        name: "Property Management",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Property Management</span> Operations",
+        heroSubheadline: "Autonomously manage rent collection, tenant payments, and maintenance invoices with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for property management workflows.",
+        screen2Header: "What Operatorx-AI Does for Property Management",
+        card1Desc: "Interprets intent and executes property management operations autonomously.",
+        card2Desc: "Every action follows property management rules and thresholds.",
+        screen3Header: "AI Command Center — Property Management Mode",
+        inputPlaceholder: "Describe the property management operation you want the AI to manage…",
+        quickActions: [
+            { text: "Automate rent collection", scenario: "scenario1" },
+            { text: "Handle late payments", scenario: "scenario2" },
+            { text: "Schedule maintenance invoices", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Property Management Operations",
+        finalCTAButton: "Request Property Management Demo"
+    },
+    medical: {
+        name: "Medical Practice",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Medical Practice</span> Operations",
+        heroSubheadline: "Autonomously manage vendor payments, lab invoices, and insurance-related billing with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for medical practice workflows.",
+        screen2Header: "What Operatorx-AI Does for Medical Practices",
+        card1Desc: "Interprets intent and executes medical billing operations autonomously.",
+        card2Desc: "Every action follows healthcare compliance rules and thresholds.",
+        screen3Header: "AI Command Center — Medical Practice Mode",
+        inputPlaceholder: "Describe the medical practice operation you want the AI to manage…",
+        quickActions: [
+            { text: "Pay vendors and labs", scenario: "scenario1" },
+            { text: "Manage insurance-related invoices", scenario: "scenario2" },
+            { text: "Monitor subscription services", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Medical Practice Operations",
+        finalCTAButton: "Request Medical Practice Demo"
+    },
+    logistics: {
+        name: "Logistics",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Logistics</span> Operations",
+        heroSubheadline: "Autonomously manage carrier payments, fuel expenses, and delivery-based invoices with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for logistics workflows.",
+        screen2Header: "What Operatorx-AI Does for Logistics",
+        card1Desc: "Interprets intent and executes logistics payment operations autonomously.",
+        card2Desc: "Every action follows logistics compliance rules and thresholds.",
+        screen3Header: "AI Command Center — Logistics Mode",
+        inputPlaceholder: "Describe the logistics operation you want the AI to manage…",
+        quickActions: [
+            { text: "Pay carriers", scenario: "scenario1" },
+            { text: "Track fuel expenses", scenario: "scenario2" },
+            { text: "Handle delayed invoice disputes", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Logistics Operations",
+        finalCTAButton: "Request Logistics Demo"
+    },
+    retail: {
+        name: "Retail",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Retail</span> Operations",
+        heroSubheadline: "Autonomously manage vendor payments, inventory invoices, and franchise royalties with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for retail workflows.",
+        screen2Header: "What Operatorx-AI Does for Retail",
+        card1Desc: "Interprets intent and executes retail payment operations autonomously.",
+        card2Desc: "Every action follows retail compliance rules and thresholds.",
+        screen3Header: "AI Command Center — Retail Mode",
+        inputPlaceholder: "Describe the retail operation you want the AI to manage…",
+        quickActions: [
+            { text: "Vendor payments", scenario: "scenario1" },
+            { text: "Inventory invoice tracking", scenario: "scenario2" },
+            { text: "Franchise royalty automation", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Retail Operations",
+        finalCTAButton: "Request Retail Demo"
+    },
+    government: {
+        name: "Government",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Government</span> Operations",
+        heroSubheadline: "Autonomously manage scheduled disbursements, compliance-checked payments, and audit-ready reporting with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for government workflows.",
+        screen2Header: "What Operatorx-AI Does for Government",
+        card1Desc: "Interprets intent and executes government payment operations autonomously.",
+        card2Desc: "Every action follows government compliance rules and thresholds.",
+        screen3Header: "AI Command Center — Government Mode",
+        inputPlaceholder: "Describe the government operation you want the AI to manage…",
+        quickActions: [
+            { text: "Scheduled disbursements", scenario: "scenario1" },
+            { text: "Compliance-checked payments", scenario: "scenario2" },
+            { text: "Audit-ready reporting", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Government Operations",
+        finalCTAButton: "Request Government Demo"
+    }
+};
+
+// ===== INDUSTRY-SPECIFIC SCENARIOS =====
+const industryScenarios = {
+    property: {
+        scenario1: {
+            title: "Rent Collection Automation",
+            input: "Collect rent on the 1st unless occupancy is below 90%.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Recurring rent collection detected.<br><strong>Frequency:</strong> Monthly<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Collection rules verified against property management policies.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Occupancy rate evaluated.<br><strong>Current occupancy:</strong> 94%<br><strong>Required minimum:</strong> 90%",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Operation Approved",
+                details: [
+                    { label: "Action", value: "Rent Collection" },
+                    { label: "Amount", value: "$28,450.00" },
+                    { label: "Execution Date", value: "February 1, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Conditions are re-evaluated before every execution."
+            }
+        },
+        scenario2: {
+            title: "Late Payment Handling",
+            input: "Automated workflow detected from transaction feed",
+            steps: [
+                {
+                    title: "Late payment detected from transaction feed",
+                    content: "Payment delay identified and categorized.<br><strong>Category:</strong> Late Payment",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Category: Delinquent Accounts",
+                    content: "Payments categorized automatically.<br>AI confidence: 98%",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "Grace period evaluated",
+                    content: "Policy thresholds checked<br>Notification scheduled",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Reminder scheduled",
+                    content: "Automated notification queued<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span><br><span style='font-size: 0.75rem; color: var(--color-text-tertiary); display: block; margin-top: 0.5rem;'>No manual intervention required.</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ]
+        },
+        scenario3: {
+            title: "Maintenance Invoice Scheduling",
+            input: "Simulated: Payment failed due to insufficient funds",
+            steps: [
+                {
+                    title: "Failure detected",
+                    content: "A payment attempt failed due to insufficient funds.<br>Maintenance invoice: $2,150.00<br>Account balance: $1,280.50",
+                    status: "danger",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Transaction halted",
+                    content: "Payment execution stopped immediately.<br>Zero duplicate charge risk",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Retry scheduled",
+                    content: "Automatic retry in 24 hours<br>Policy: Max 3 attempts",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "User notification generated",
+                    content: "Alert sent to property manager<br>Manual review available",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            alert: {
+                title: "Execution Paused",
+                message: "A payment attempt failed due to insufficient funds. No duplicate charges. No silent failures.",
+                badge: "⚠ Action safely paused"
+            }
+        }
+    },
+    medical: {
+        scenario1: {
+            title: "Lab Payment Automation",
+            input: "Pay lab invoices weekly unless charges exceed $10,000.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Recurring lab payment detected.<br><strong>Frequency:</strong> Weekly<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Healthcare payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Compliance satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Invoice amount evaluated.<br><strong>Current total:</strong> $7,340.50<br><strong>Threshold limit:</strong> $10,000",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Operation Scheduled",
+                details: [
+                    { label: "Action", value: "Lab Payment" },
+                    { label: "Amount", value: "$7,340.50" },
+                    { label: "Execution Date", value: "January 22, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Conditions are re-evaluated before every execution."
+            }
+        },
+        scenario2: {
+            title: "Insurance Invoice Categorization",
+            input: "Automated workflow detected",
+            steps: [
+                {
+                    title: "Insurance invoice detected from transaction feed",
+                    content: "Invoice identified and categorized.<br><strong>Category:</strong> Insurance Claims",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Category: Insurance Billing",
+                    content: "Claims categorized automatically.<br>AI confidence: 97%",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "Claim verification scheduled",
+                    content: "Authorization status checked<br>Payment queue updated",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Payment prepared",
+                    content: "Invoice queued for processing<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ]
+        },
+        scenario3: {
+            title: "Subscription Service Monitoring",
+            input: "Monitor medical software subscriptions",
+            steps: [
+                {
+                    title: "Subscription renewal detected",
+                    content: "Medical software subscription identified.<br>Service: EMR Platform<br>Amount: $850/month",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Usage validation",
+                    content: "Service utilization verified.<br>Active users: 12<br>License compliance: ✔",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Budget check",
+                    content: "Spending allocation verified.<br><strong>IT Budget remaining:</strong> $15,400",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Renewal approved",
+                    content: "Payment authorized and scheduled.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Subscription Renewed",
+                details: [
+                    { label: "Action", value: "EMR Platform Renewal" },
+                    { label: "Amount", value: "$850.00" },
+                    { label: "Execution Date", value: "February 1, 2026" },
+                    { label: "Method", value: "Credit Card" }
+                ],
+                note: "Auto-renewal active. Manual cancellation available anytime."
+            }
+        }
+    },
+    logistics: {
+        scenario1: {
+            title: "Carrier Payment Automation",
+            input: "Pay carriers within net-15 if delivery is confirmed.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Carrier payment detected.<br><strong>Payment terms:</strong> Net-15<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Logistics payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Delivery confirmation checked.<br><strong>Status:</strong> Delivered<br><strong>Proof of delivery:</strong> Verified",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Payment Scheduled",
+                details: [
+                    { label: "Action", value: "Carrier Payment" },
+                    { label: "Amount", value: "$4,250.00" },
+                    { label: "Execution Date", value: "January 28, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Payment released only after delivery confirmation."
+            }
+        },
+        scenario2: {
+            title: "Fuel Expense Tracking",
+            input: "Automated fuel expense categorization",
+            steps: [
+                {
+                    title: "Fuel expense detected from transaction feed",
+                    content: "Transaction identified and categorized.<br><strong>Category:</strong> Fleet Fuel",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Category: Operations Expense",
+                    content: "Expenses categorized automatically.<br>AI confidence: 99%",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "Budget allocation checked",
+                    content: "Spending limits verified<br>Fleet budget: Within limits",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Expense logged",
+                    content: "Transaction recorded and approved<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ]
+        },
+        scenario3: {
+            title: "Delayed Invoice Dispute",
+            input: "Simulated: Invoice dispute detected",
+            steps: [
+                {
+                    title: "Dispute detected",
+                    content: "Invoice discrepancy identified.<br>Expected: $3,200<br>Invoiced: $4,150",
+                    status: "warning",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Payment halted",
+                    content: "Transaction paused for review.<br>Dispute flag raised",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Review queued",
+                    content: "Manual review requested<br>Vendor contacted automatically",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Resolution pending",
+                    content: "Awaiting vendor response<br>Payment on hold until resolved",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            alert: {
+                title: "Payment Under Review",
+                message: "Invoice discrepancy detected. Payment paused until dispute is resolved. No unauthorized charges.",
+                badge: "⚠ Manual review required"
+            }
+        }
+    },
+    retail: {
+        scenario1: {
+            title: "Vendor Payment Automation",
+            input: "Pay vendors monthly after inventory reconciliation.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Vendor payment detected.<br><strong>Frequency:</strong> Monthly<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Retail payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Inventory reconciliation completed.<br><strong>Match status:</strong> 98% match<br><strong>Discrepancies:</strong> Resolved",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Payment Scheduled",
+                details: [
+                    { label: "Action", value: "Vendor Payment" },
+                    { label: "Amount", value: "$18,750.00" },
+                    { label: "Execution Date", value: "February 1, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Payment released only after inventory verification."
+            }
+        },
+        scenario2: {
+            title: "Inventory Invoice Tracking",
+            input: "Automated invoice categorization",
+            steps: [
+                {
+                    title: "Inventory invoice detected from transaction feed",
+                    content: "Purchase order matched to invoice.<br><strong>Category:</strong> Inventory",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Category: COGS",
+                    content: "Invoices categorized automatically.<br>AI confidence: 96%",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "PO matching completed",
+                    content: "Invoice matched to PO #4521<br>Quantities verified",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Payment queued",
+                    content: "Invoice approved for payment<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ]
+        },
+        scenario3: {
+            title: "Franchise Royalty Automation",
+            input: "Calculate and pay franchise royalties",
+            steps: [
+                {
+                    title: "Royalty calculation initiated",
+                    content: "Monthly revenue data collected.<br><strong>Gross sales:</strong> $125,400<br><strong>Royalty rate:</strong> 6%",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Calculation verified",
+                    content: "Royalty amount computed.<br><strong>Amount due:</strong> $7,524.00",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Payment authorization",
+                    content: "Franchise agreement terms verified.<br>Payment terms: Net-30",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Payment scheduled",
+                    content: "Royalty payment queued.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Royalty Payment Scheduled",
+                details: [
+                    { label: "Action", value: "Franchise Royalty" },
+                    { label: "Amount", value: "$7,524.00" },
+                    { label: "Execution Date", value: "February 15, 2026" },
+                    { label: "Method", value: "Wire Transfer" }
+                ],
+                note: "Auto-calculated based on monthly sales data."
+            }
+        }
+    },
+    government: {
+        scenario1: {
+            title: "Scheduled Disbursement",
+            input: "Schedule disbursement only if approvals are complete.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Government disbursement detected.<br><strong>Type:</strong> Grant Payment<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Government compliance rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Regulatory compliance satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Approval status checked.<br><strong>Authorization 1:</strong> ✔ Approved<br><strong>Authorization 2:</strong> ✔ Approved",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "All conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Disbursement Scheduled",
+                details: [
+                    { label: "Action", value: "Grant Disbursement" },
+                    { label: "Amount", value: "$50,000.00" },
+                    { label: "Execution Date", value: "February 1, 2026" },
+                    { label: "Method", value: "Wire Transfer" }
+                ],
+                note: "Full audit trail generated for compliance review."
+            }
+        },
+        scenario2: {
+            title: "Compliance-Checked Payment",
+            input: "Vendor payment with compliance verification",
+            steps: [
+                {
+                    title: "Payment request received",
+                    content: "Vendor payment identified.<br><strong>Vendor:</strong> Infrastructure LLC<br><strong>Amount:</strong> $125,000",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Compliance verification",
+                    content: "Vendor status checked.<br>✔ Active registration<br>✔ Tax compliance current",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "Budget allocation verified",
+                    content: "Funds availability confirmed.<br><strong>Budget line:</strong> Capital Projects<br><strong>Remaining:</strong> $450,000",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Payment approved",
+                    content: "All checks passed. Payment authorized.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ],
+            result: {
+                title: "Payment Approved",
+                details: [
+                    { label: "Action", value: "Vendor Payment" },
+                    { label: "Amount", value: "$125,000.00" },
+                    { label: "Execution Date", value: "January 20, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Full compliance documentation attached to audit log."
+            }
+        },
+        scenario3: {
+            title: "Audit-Ready Reporting",
+            input: "Generate quarterly audit report",
+            steps: [
+                {
+                    title: "Report generation initiated",
+                    content: "Q4 2025 audit data collected.<br><strong>Transactions:</strong> 1,247<br><strong>Total disbursed:</strong> $2.4M",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Data validation",
+                    content: "Transaction integrity verified.<br>✔ No discrepancies found<br>✔ All authorizations documented",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Report compilation",
+                    content: "Audit trail formatted for review.<br>Format: PDF + CSV exports",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Report ready",
+                    content: "Quarterly audit report generated.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Report available</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Audit Report Generated",
+                details: [
+                    { label: "Period", value: "Q4 2025" },
+                    { label: "Transactions", value: "1,247" },
+                    { label: "Total Disbursed", value: "$2,400,000.00" },
+                    { label: "Format", value: "PDF + CSV" }
+                ],
+                note: "Report includes complete audit trail for all transactions."
+            }
+        }
+    }
+};
+
+// ===== LEGACY SCENARIO DATA (for backwards compatibility) =====
 const scenarios = {
     rent: {
         title: "Rent Payment Automation",
@@ -481,6 +1140,190 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('  Ctrl/Cmd + Enter (in AI Input) : Execute Command');
 });
 
+// ===== ORGANIZATION SWITCHING =====
+function switchOrganization(orgType) {
+    currentOrg = orgType;
+    const content = industryContent[orgType];
+    
+    // Update hero section
+    const heroHeadline = document.querySelector('[data-dynamic="hero-headline"]');
+    if (heroHeadline) {
+        heroHeadline.innerHTML = content.heroHeadline;
+    }
+    
+    const heroSubheadline = document.querySelector('[data-dynamic="hero-subheadline"]');
+    if (heroSubheadline) {
+        heroSubheadline.textContent = content.heroSubheadline;
+    }
+    
+    const ctaMicro = document.querySelector('[data-dynamic="cta-micro"]');
+    if (ctaMicro) {
+        ctaMicro.textContent = content.ctaMicro;
+    }
+    
+    // Update Screen 2
+    const screen2Header = document.querySelector('[data-dynamic="screen2-header"]');
+    if (screen2Header) {
+        screen2Header.textContent = content.screen2Header;
+    }
+    
+    const card1Desc = document.querySelector('[data-dynamic="card1-desc"]');
+    if (card1Desc) {
+        card1Desc.textContent = content.card1Desc;
+    }
+    
+    const card2Desc = document.querySelector('[data-dynamic="card2-desc"]');
+    if (card2Desc) {
+        card2Desc.textContent = content.card2Desc;
+    }
+    
+    // Update Screen 3
+    const screen3Header = document.querySelector('[data-dynamic="screen3-header"]');
+    if (screen3Header) {
+        screen3Header.textContent = content.screen3Header;
+    }
+    
+    const inputPlaceholder = document.getElementById('aiInput');
+    if (inputPlaceholder) {
+        inputPlaceholder.placeholder = content.inputPlaceholder;
+    }
+    
+    // Update Quick Actions
+    const quickActionsContainer = document.querySelector('[data-dynamic-container="quick-actions"]');
+    if (quickActionsContainer) {
+        const label = quickActionsContainer.querySelector('.quick-label');
+        quickActionsContainer.innerHTML = `
+            <p class="quick-label">Quick Start:</p>
+            ${content.quickActions.map(action => `
+                <button class="quick-btn" onclick="loadScenario('${action.scenario}')">
+                    ${action.text}
+                </button>
+            `).join('')}
+            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.5rem; font-style: italic;">These are simulated enterprise workflows.</p>
+        `;
+    }
+    
+    console.log(`Switched to ${content.name} organization`);
+}
+
+// Updated loadScenario to handle industry-specific scenarios
+function loadIndustryScenario(scenarioKey) {
+    const scenario = industryScenarios[currentOrg]?.[scenarioKey];
+    if (!scenario) {
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg}`);
+        return;
+    }
+    
+    const aiInput = document.getElementById('aiInput');
+    aiInput.value = scenario.input;
+    
+    // Highlight the input field briefly
+    aiInput.style.borderColor = 'var(--color-accent-primary)';
+    setTimeout(() => {
+        aiInput.style.borderColor = '';
+    }, 1000);
+}
+
+// Initialize organization selector
+document.addEventListener('DOMContentLoaded', function() {
+    const orgSelector = document.getElementById('orgSelector');
+    if (orgSelector) {
+        orgSelector.addEventListener('change', function() {
+            switchOrganization(this.value);
+        });
+        
+        // Initialize with default organization
+        switchOrganization('property');
+    }
+});
+
+// Update loadScenario to route to industry scenarios
+const originalLoadScenario = loadScenario;
+loadScenario = function(scenarioKey) {
+    // Check if it's an industry scenario key (scenario1, scenario2, scenario3)
+    if (scenarioKey.startsWith('scenario')) {
+        loadIndustryScenario(scenarioKey);
+    } else {
+        // Fall back to original scenarios for backwards compatibility
+        originalLoadScenario(scenarioKey);
+    }
+};
+
+// Update executeAI to use industry scenarios
+const originalExecuteAI = executeAI;
+executeAI = async function() {
+    if (isExecuting) return;
+    
+    const inputValue = document.getElementById('aiInput').value.trim();
+    
+    if (!inputValue) {
+        alert('Please enter a command or select an example.');
+        return;
+    }
+    
+    // Determine which industry scenario to use
+    let scenarioKey = 'scenario1'; // default
+    const orgScenarios = industryScenarios[currentOrg];
+    
+    // Try to match input to scenarios
+    for (const [key, scenario] of Object.entries(orgScenarios)) {
+        if (inputValue.toLowerCase().includes(scenario.input.toLowerCase().substring(0, 20))) {
+            scenarioKey = key;
+            break;
+        }
+    }
+    
+    const scenario = orgScenarios[scenarioKey];
+    if (!scenario) {
+        console.error('No scenario found');
+        return;
+    }
+    
+    isExecuting = true;
+    
+    // Clear timeline
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+    
+    // Update scenario title
+    const scenarioTitle = document.getElementById('scenarioTitle');
+    if (scenarioTitle) {
+        scenarioTitle.textContent = scenario.title;
+    }
+    
+    // Navigate to execution screen
+    navigateToScreen(4);
+    
+    // Wait a moment before starting execution
+    await sleep(500);
+    
+    // Add steps progressively
+    for (let i = 0; i < scenario.steps.length; i++) {
+        await sleep(800);
+        addTimelineStep(scenario.steps[i], i);
+    }
+    
+    // Show result or alert
+    await sleep(1000);
+    
+    if (scenario.alert) {
+        showAlert(scenario.alert);
+    } else if (scenario.result) {
+        showScenarioResult(scenario);
+    }
+    
+    isExecuting = false;
+    
+    // Log to audit trail
+    auditLog.unshift({
+        timestamp: formatTimestamp(),
+        action: scenario.title,
+        decision: scenario.alert ? "Paused" : "Approved",
+        policy: industryContent[currentOrg].name + " Rules",
+        result: scenario.alert ? "Halted" : "Success"
+    });
+};
+
 // ===== UTILITY FUNCTIONS =====
 function formatTimestamp(date = new Date()) {
     return date.toLocaleString('en-US', {
@@ -502,6 +1345,7 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         navigateToScreen,
         loadScenario,
-        executeAI
+        executeAI,
+        switchOrganization
     };
 }
