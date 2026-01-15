@@ -1287,18 +1287,31 @@ executeAI = async function() {
     
     isExecuting = true;
     
-    // Clear timeline
+    // Clear timeline in Command Center
     const timeline = document.getElementById('timeline');
     timeline.innerHTML = '';
     
-    // Update scenario title
-    const scenarioTitle = document.getElementById('scenarioTitle');
-    if (scenarioTitle) {
-        scenarioTitle.textContent = scenario.title;
+    // Update system status to show execution in progress
+    const statusMetrics = document.getElementById('statusMetrics');
+    if (statusMetrics) {
+        statusMetrics.innerHTML = `
+            <div class="metric">
+                <div class="metric-label">Status</div>
+                <div class="metric-value" style="color: var(--color-accent-warning);">EXECUTING</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Operation</div>
+                <div class="metric-value" style="font-size: 0.875rem;">${scenario.title}</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Steps Complete</div>
+                <div class="metric-value" id="stepsComplete">0/${scenario.steps.length}</div>
+            </div>
+        `;
     }
     
-    // Navigate to execution screen
-    navigateToScreen(4);
+    // Stay on Command Center (screen 3) - don't navigate away
+    // navigateToScreen(4); // REMOVED - stay on current screen
     
     // Wait a moment before starting execution
     await sleep(500);
@@ -1307,15 +1320,21 @@ executeAI = async function() {
     for (let i = 0; i < scenario.steps.length; i++) {
         await sleep(800);
         addTimelineStep(scenario.steps[i], i);
+        
+        // Update progress counter
+        const stepsCounter = document.getElementById('stepsComplete');
+        if (stepsCounter) {
+            stepsCounter.textContent = `${i + 1}/${scenario.steps.length}`;
+        }
     }
     
-    // Show result or alert
+    // Show result or alert in right panel
     await sleep(1000);
     
     if (scenario.alert) {
-        showAlert(scenario.alert);
+        showAlertInCommandCenter(scenario.alert);
     } else if (scenario.result) {
-        showScenarioResult(scenario);
+        showResultInCommandCenter(scenario.result);
     }
     
     isExecuting = false;
@@ -1329,6 +1348,87 @@ executeAI = async function() {
         result: scenario.alert ? "Halted" : "Success"
     });
 };
+
+// New function to show alerts in Command Center right panel
+function showAlertInCommandCenter(alert) {
+    const statusMetrics = document.getElementById('statusMetrics');
+    if (statusMetrics) {
+        statusMetrics.innerHTML = `
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg); padding: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                    <span style="font-size: 1.5rem;">⚠️</span>
+                    <h4 style="margin: 0; color: var(--color-accent-danger);">${alert.title}</h4>
+                </div>
+                <p style="color: var(--color-text-secondary); margin-bottom: 1rem; font-size: 0.9375rem;">${alert.message}</p>
+                <div class="badge" style="background: rgba(239, 68, 68, 0.2); color: var(--color-accent-danger); padding: 0.5rem 1rem; border-radius: var(--radius-md); display: inline-block;">
+                    ${alert.badge}
+                </div>
+                <button class="btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="resetCommandCenter()">
+                    Reset & Try Again
+                </button>
+            </div>
+        `;
+    }
+}
+
+// New function to show results in Command Center right panel
+function showResultInCommandCenter(result) {
+    const statusMetrics = document.getElementById('statusMetrics');
+    if (statusMetrics) {
+        statusMetrics.innerHTML = `
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-lg); padding: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                    <span style="font-size: 1.5rem;">✅</span>
+                    <h4 style="margin: 0; color: var(--color-accent-success);">${result.title}</h4>
+                </div>
+                ${result.details.map(detail => `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
+                        <span style="color: var(--color-text-tertiary); font-size: 0.875rem;">${detail.label}</span>
+                        <span style="color: var(--color-text-primary); font-weight: var(--font-weight-medium); font-size: 0.875rem;">${detail.value}</span>
+                    </div>
+                `).join('')}
+                <p style="color: var(--color-text-tertiary); font-size: 0.75rem; margin-top: 1rem; font-style: italic;">${result.note}</p>
+                <button class="btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="resetCommandCenter()">
+                    Execute Another Operation
+                </button>
+            </div>
+        `;
+    }
+}
+
+// New function to reset Command Center after execution
+function resetCommandCenter() {
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '<div class="timeline-empty"><p>Select a command to begin AI execution</p></div>';
+    
+    const statusMetrics = document.getElementById('statusMetrics');
+    if (statusMetrics) {
+        statusMetrics.innerHTML = `
+            <div class="metric">
+                <div class="metric-label">Active Policies</div>
+                <div class="metric-value">12</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Risk Level</div>
+                <div class="metric-value metric-success">LOW</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Auth Status</div>
+                <div class="metric-value metric-success">VERIFIED</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Operations Today</div>
+                <div class="metric-value">8</div>
+            </div>
+        `;
+    }
+    
+    // Clear the input
+    const aiInput = document.getElementById('aiInput');
+    if (aiInput) {
+        aiInput.value = '';
+    }
+}
 
 // ===== UTILITY FUNCTIONS =====
 function formatTimestamp(date = new Date()) {
