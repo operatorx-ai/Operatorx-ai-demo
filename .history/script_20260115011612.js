@@ -1732,14 +1732,9 @@ async function playHeroDemo(demoType) {
             <div class="impact-label">Automatically Handled</div>
             <div class="impact-value">${demo.frequency} times/${demo.period}</div>
         </div>
-        <div style="display: flex; gap: 1rem;">
-            <button class="btn-primary" onclick="navigateToScreen(4)">
-                Try It Yourself →
-            </button>
-            <button class="btn-secondary" onclick="navigateToScreen(2)">
-                See Business Impact
-            </button>
-        </div>
+        <button class="btn-primary" onclick="navigateToScreen(2)">
+            See Full Business Impact →
+        </button>
     `;
 }
 
