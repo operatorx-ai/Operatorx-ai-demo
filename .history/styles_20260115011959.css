@@ -629,8 +629,6 @@ body {
     cursor: pointer;
     text-decoration: none;
     transition: color var(--transition-fast);
-    padding: 0.5rem 1rem;
-    font-family: inherit;
 }
 
 .btn-link:hover {
@@ -640,7 +638,6 @@ body {
 
 .nav-divider {
     color: var(--color-text-tertiary);
-    user-select: none;
 }
 
 @media (max-width: 768px) {
