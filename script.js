@@ -1145,13 +1145,15 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
+    console.log(`Switching to ${content.name}...`);
+    
     // Update hero section
-    const heroHeadline = document.querySelector('[data-dynamic="hero-headline"]');
+    const heroHeadline = document.querySelector('.hero-headline');
     if (heroHeadline) {
         heroHeadline.innerHTML = content.heroHeadline;
     }
     
-    const heroSubheadline = document.querySelector('[data-dynamic="hero-subheadline"]');
+    const heroSubheadline = document.querySelector('.hero-subheadline');
     if (heroSubheadline) {
         heroSubheadline.textContent = content.heroSubheadline;
     }
@@ -1162,25 +1164,21 @@ function switchOrganization(orgType) {
     }
     
     // Update Screen 2
-    const screen2Header = document.querySelector('[data-dynamic="screen2-header"]');
+    const screen2Header = document.querySelector('.section-title');
     if (screen2Header) {
         screen2Header.textContent = content.screen2Header;
     }
     
-    const card1Desc = document.querySelector('[data-dynamic="card1-desc"]');
-    if (card1Desc) {
-        card1Desc.textContent = content.card1Desc;
-    }
-    
-    const card2Desc = document.querySelector('[data-dynamic="card2-desc"]');
-    if (card2Desc) {
-        card2Desc.textContent = content.card2Desc;
+    const featureCards = document.querySelectorAll('.feature-card p:first-of-type');
+    if (featureCards.length >= 2) {
+        featureCards[0].textContent = content.card1Desc;
+        featureCards[1].textContent = content.card2Desc;
     }
     
     // Update Screen 3
-    const screen3Header = document.querySelector('[data-dynamic="screen3-header"]');
-    if (screen3Header) {
-        screen3Header.textContent = content.screen3Header;
+    const commandHeader = document.querySelector('.command-header h2');
+    if (commandHeader) {
+        commandHeader.textContent = content.screen3Header;
     }
     
     const inputPlaceholder = document.getElementById('aiInput');
@@ -1189,9 +1187,8 @@ function switchOrganization(orgType) {
     }
     
     // Update Quick Actions
-    const quickActionsContainer = document.querySelector('[data-dynamic-container="quick-actions"]');
+    const quickActionsContainer = document.querySelector('.quick-actions');
     if (quickActionsContainer) {
-        const label = quickActionsContainer.querySelector('.quick-label');
         quickActionsContainer.innerHTML = `
             <p class="quick-label">Quick Start:</p>
             ${content.quickActions.map(action => `
@@ -1203,7 +1200,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`Switched to ${content.name} organization`);
+    console.log(`✓ Switched to ${content.name} organization`);
 }
 
 // Updated loadScenario to handle industry-specific scenarios
@@ -1226,15 +1223,24 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    const orgSelector = document.getElementById('orgSelector');
-    if (orgSelector) {
-        orgSelector.addEventListener('change', function() {
-            switchOrganization(this.value);
-        });
-        
-        // Initialize with default organization
-        switchOrganization('property');
-    }
+    console.log('DOM Content Loaded - Initializing organization selector...');
+    
+    // Small delay to ensure all DOM elements are fully rendered
+    setTimeout(() => {
+        const orgSelector = document.getElementById('orgSelector');
+        if (orgSelector) {
+            orgSelector.addEventListener('change', function() {
+                console.log('Organization changed to:', this.value);
+                switchOrganization(this.value);
+            });
+            
+            // Initialize with default organization
+            console.log('Initializing default organization: property');
+            switchOrganization('property');
+        } else {
+            console.error('Organization selector not found!');
+        }
+    }, 100);
 });
 
 // Update loadScenario to route to industry scenarios
