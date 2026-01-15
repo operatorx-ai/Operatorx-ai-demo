@@ -1791,51 +1791,6 @@ function closeHeroDemo() {
     demoPlayer.style.display = 'none';
 }
 
-// ===== CEO-LEVEL PLACEHOLDER ROTATION =====
-function startPlaceholderRotation() {
-    // Clear any existing interval
-    if (placeholderRotationInterval) {
-        clearInterval(placeholderRotationInterval);
-    }
-    
-    const aiInput = document.getElementById('aiInput');
-    if (!aiInput) return;
-    
-    const prompts = ceoLevelPrompts[currentOrg];
-    let currentIndex = 0;
-    
-    // Set initial placeholder
-    aiInput.placeholder = prompts[currentIndex];
-    
-    // Rotate every 4 seconds
-    placeholderRotationInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % prompts.length;
-        aiInput.placeholder = prompts[currentIndex];
-    }, 4000);
-}
-
-// Stop rotation when user starts typing
-document.addEventListener('DOMContentLoaded', () => {
-    const aiInput = document.getElementById('aiInput');
-    if (aiInput) {
-        aiInput.addEventListener('focus', () => {
-            if (placeholderRotationInterval) {
-                clearInterval(placeholderRotationInterval);
-                placeholderRotationInterval = null;
-            }
-        });
-        
-        aiInput.addEventListener('blur', () => {
-            if (!aiInput.value.trim()) {
-                startPlaceholderRotation();
-            }
-        });
-    }
-    
-    // Start rotation on page load
-    startPlaceholderRotation();
-});
-
 // Export for potential module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -1844,7 +1799,6 @@ if (typeof module !== 'undefined' && module.exports) {
         executeAI,
         switchOrganization,
         playHeroDemo,
-        closeHeroDemo,
-        startPlaceholderRotation
+        closeHeroDemo
     };
 }
