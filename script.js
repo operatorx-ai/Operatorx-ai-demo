@@ -1,294 +1,507 @@
-// Demo data for different business types
-const demoData = {
-    default: {
-        businessType: "Local Service Business",
-        problems: [
-            "Chasing unpaid invoices and following up on late payments",
-            "Manually tracking expenses across multiple vendors and suppliers",
-            "Scheduling appointments and sending reminder messages",
-            "Creating weekly reports to know if you're actually making money",
-            "Following up with customers who haven't returned in a while"
+// ========================================
+// OPERATORX-AI - PRODUCTION DEMO ENGINE
+// Enterprise AI Operations Platform
+// ========================================
+
+// ===== GLOBAL STATE =====
+let currentScreen = 1;
+let isExecuting = false;
+const auditLog = [];
+
+// ===== SCENARIO DATA =====
+const scenarios = {
+    rent: {
+        title: "Rent Payment Automation",
+        input: "Pay rent on the 1st of every month unless my balance is below $2,000.",
+        steps: [
+            {
+                title: "Intent Identified",
+                content: "Recurring rent payment detected.<br><strong>Frequency:</strong> Monthly<br><strong>Conditional logic applied</strong>",
+                status: "success",
+                timestamp: "09:00:01"
+            },
+            {
+                title: "Policy Check",
+                content: "Payment amount, frequency, and authorization verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
+                status: "success",
+                timestamp: "09:00:02"
+            },
+            {
+                title: "Balance Check",
+                content: "Current available balance evaluated.<br><strong>Balance:</strong> $3,420.17<br><strong>Required minimum:</strong> $2,000",
+                status: "success",
+                timestamp: "09:00:03"
+            },
+            {
+                title: "Decision Engine",
+                content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                status: "success",
+                timestamp: "09:00:04"
+            }
         ],
-        automations: [
-            "Invoice follow-ups sent automatically 3 days after due date",
-            "All expenses tracked and categorized in real-time",
-            "Appointment reminders sent 24 hours before scheduled time",
-            "Daily profit/loss summaries delivered to your phone",
-            "Re-engagement messages sent to inactive customers automatically"
-        ],
-        liveExample: {
-            title: "Invoice Follow-Up Automation",
-            steps: [
-                { time: "Monday 9:00 AM", action: "Invoice #1847 becomes 3 days overdue", detail: "$850 from Johnson Plumbing" },
-                { time: "Monday 9:02 AM", action: "AI sends polite payment reminder via email and text", detail: "\"Hi Mike, just a friendly reminder about invoice #1847...\"" },
-                { time: "Monday 11:30 AM", action: "Customer responds and pays immediately", detail: "$850 received via ACH transfer" },
-                { time: "Monday 11:31 AM", action: "AI updates your books and sends you confirmation", detail: "\"Johnson Plumbing payment received and recorded\"" }
+        result: {
+            title: "Operation Scheduled Successfully",
+            details: [
+                { label: "Action", value: "Rent Payment" },
+                { label: "Amount", value: "$1,450.00" },
+                { label: "Execution Date", value: "February 1, 2026" },
+                { label: "Payment Method", value: "ACH" }
             ],
-            timePerWeek: "8 hours",
-            timePerMonth: "32 hours",
-            value: "This is like having an office manager who never sleeps, never forgets, and costs less than $10/day."
+            note: "Conditions will be re-evaluated before every execution."
         }
     },
-    salon: {
-        businessType: "Beauty Salon / Spa",
-        executiveSummary: "Reduce no-shows by 95%. Increase rebooking rate by 40%. Save $24,000/year vs hiring front desk staff.",
-        problems: [
-            "🚫 No-shows cost you $8,000-$15,000 annually in lost revenue",
-            "💳 Manual end-of-day reconciliation takes 45 minutes daily",
-            "🔄 Only 30% of clients rebook - leaving 70% of potential revenue on the table",
-            "📦 Inventory shrinkage and stockouts cost 10-15% of product revenue",
-            "📊 Commission errors damage stylist morale and retention"
+    bills: {
+        title: "Bill Detection & Categorization",
+        input: "Handle my utilities automatically.",
+        bills: [
+            {
+                name: "Electric Company",
+                amount: "$127.45",
+                category: "Utilities",
+                dueDate: "Feb 15, 2026",
+                status: "Detected"
+            },
+            {
+                name: "Water & Sewage",
+                amount: "$89.12",
+                category: "Utilities",
+                dueDate: "Feb 10, 2026",
+                status: "Scheduled"
+            },
+            {
+                name: "Internet Service",
+                amount: "$79.99",
+                category: "Utilities",
+                dueDate: "Feb 5, 2026",
+                status: "Paid"
+            }
         ],
-        automations: [
-            "✅ 95% show-up rate with automated 24-hour reminders (vs 75% industry average)",
-            "💰 Daily revenue summaries delivered to your phone by 8 PM",
-            "💬 40% rebooking rate with automated follow-ups (vs 30% without)",
-            "🚨 Zero stockouts with real-time inventory alerts",
-            "🎯 100% accurate commission reports delivered weekly"
-        ],
-        liveExample: {
-            title: "No-Show Prevention = Direct Revenue Protection",
-            steps: [
-                { time: "Tuesday 10:00 AM", action: "Sarah books haircut for Wednesday 10:00 AM", detail: "Service value: $85 + $20 tip = $105 revenue at stake" },
-                { time: "Tuesday 10:02 AM", action: "AI sends instant confirmation", detail: "'Thanks Sarah! Excited to see you tomorrow ✨'" },
-                { time: "Wednesday 9:00 AM", action: "24-hour reminder automatically sent", detail: "'Hi Sarah! Reminder: Your appointment is in 1 hour'" },
-                { time: "Wednesday 10:00 AM", action: "Sarah arrives on time", detail: "🎯 $105 revenue secured • Chair utilization: 100%" }
-            ],
-            timePerWeek: "5 hours",
-            timePerMonth: "20 hours",
-            value: "ROI: Prevent 3-5 no-shows weekly = $1,200-$2,000 recovered monthly. That's $14,400-$24,000 annually. Cost of OperatorX-AI? Less than 10% of what you recover."
-        }
+        steps: [
+            {
+                title: "Bill detected from transaction feed",
+                content: "Utility bill identified and categorized.<br><strong>Category:</strong> Utilities",
+                status: "success",
+                timestamp: "10:30:01"
+            },
+            {
+                title: "Category: Utilities",
+                content: "Bills categorized automatically.<br>AI confidence: 98%",
+                status: "success",
+                timestamp: "10:30:02"
+            },
+            {
+                title: "Due date extracted",
+                content: "Payment deadlines parsed<br>Calendar synchronized",
+                status: "success",
+                timestamp: "10:30:03"
+            },
+            {
+                title: "Payment scheduled",
+                content: "3 payments queued<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span><br><span style='font-size: 0.75rem; color: var(--color-text-tertiary); display: block; margin-top: 0.5rem;'>No manual sorting required.</span>",
+                status: "success",
+                timestamp: "10:30:04"
+            }
+        ]
     },
-    contractor: {
-        businessType: "Contractor / Home Services",
-        executiveSummary: "Improve cash flow by 35%. Get paid 18 days faster on average. Replace $50K/year office manager cost.",
-        problems: [
-            "💵 $50K-$150K tied up in unpaid invoices at any given time",
-            "❌ 30% of jobs are less profitable than you think (hidden costs)",
-            "🧑‍💻 Manual data entry costs 10-12 hours/week in lost productive time",
-            "📉 60% of estimates go cold - that's potential revenue walking away",
-            "🛠️ Crew scheduling chaos costs 2-3 billable hours daily"
+    failure: {
+        title: "Failure Handling & Safety Protocols",
+        input: "Simulated: Payment failed due to insufficient funds",
+        steps: [
+            {
+                title: "Failure detected",
+                content: "A payment attempt failed due to insufficient funds.<br>Rent payment: $1,450.00<br>Account balance: $1,280.50",
+                status: "danger",
+                timestamp: "09:00:01"
+            },
+            {
+                title: "Transaction halted",
+                content: "Payment execution stopped immediately.<br>Zero duplicate charge risk",
+                status: "success",
+                timestamp: "09:00:02"
+            },
+            {
+                title: "Retry scheduled",
+                content: "Automatic retry in 24 hours<br>Policy: Max 3 attempts",
+                status: "success",
+                timestamp: "09:00:03"
+            },
+            {
+                title: "User notification generated",
+                content: "Alert sent to user<br>Manual review available",
+                status: "success",
+                timestamp: "09:00:04"
+            }
         ],
-        automations: [
-            "💸 Get paid in 18 days (vs 35-day industry average) with automated follow-ups",
-            "📊 Real-time job costing shows profitability before final invoice",
-            "✅ Zero data entry - receipts processed automatically via photo/email",
-            "💬 40% estimate conversion rate (vs 25% without follow-up)",
-            "📅 100% crew accountability with automated daily confirmations"
-        ],
-        liveExample: {
-            title: "Cash Flow Acceleration = Business Growth Fuel",
-            steps: [
-                { time: "Monday", action: "Invoice #2891 is 7 days overdue", detail: "$3,450 from Martinez HVAC install • Your cash is tied up" },
-                { time: "Monday 8:00 AM", action: "AI sends polite but firm reminder", detail: "'Quick check-in on payment for your recent install...'" },
-                { time: "Thursday", action: "No response - AI escalates strategically", detail: "'This is OperatorX-AI for ABC Contractors, following up...'" },
-                { time: "Friday 2:00 PM", action: "Payment received and reconciled", detail: "✅ $3,450 in bank • Books updated • Cash flow improved" }
-            ],
-            timePerWeek: "12 hours",
-            timePerMonth: "48 hours",
-            value: "ROI: 35% cash flow improvement means you can take more jobs without credit lines. Save $50K/year vs hiring. Get paid 18 days faster = $30K-$80K freed up for business growth."
-        }
-    },
-    retail: {
-        businessType: "Retail Store",
-        executiveSummary: "Eliminate $12K-$18K annual stockout losses. Reduce dead inventory by 40%. Save 24 hours monthly.",
-        problems: [
-            "📦 Stockouts cost $12K-$18K yearly in missed sales opportunities",
-            "💵 End-of-day reconciliation takes 45-60 minutes daily",
-            "💸 Late payment fees to suppliers cost $200-$500 monthly",
-            "📉 Dead inventory ties up $8K-$15K in unsold products",
-            "🚪 65% of customers never return after first purchase"
-        ],
-        automations: [
-            "Inventory alerts when stock drops below minimum levels",
-            "Daily sales summaries with profit margins calculated",
-            "Automatic payment reminders for supplier invoices",
-            "Monthly product profitability reports (top sellers vs. dead stock)",
-            "Re-engagement texts sent to customers after 60 days"
-        ],
-        liveExample: {
-            title: "Inventory Intelligence = Revenue Protection",
-            steps: [
-                { time: "Tuesday 3:00 PM", action: "Best-selling sneakers hit critical level", detail: "Nike Air Max: 3 pairs left • Sells 8/week • Stockout risk in 48 hours" },
-                { time: "Tuesday 3:05 PM", action: "AI sends instant mobile alert", detail: "'🚨 URGENT: Nike Air Max low stock - 3 left, need 20'" },
-                { time: "Tuesday 3:15 PM", action: "AI drafts supplier order for approval", detail: "'Ready to order 20 pairs from Nike ($1,200) - Approve?'" },
-                { time: "Tuesday 3:20 PM", action: "One-tap approval, order placed", detail: "✅ Stockout prevented • $2,400 in sales protected this week" }
-            ],
-            timePerWeek: "6 hours",
-            timePerMonth: "24 hours",
-            value: "ROI: Prevent $12K-$18K annual stockout losses. Reduce dead inventory 40% (free up $8K). Automate tasks = eliminate need for part-time inventory manager ($18K/year saved)."
+        alert: {
+            title: "Execution Paused",
+            message: "A payment attempt failed due to insufficient funds. No duplicate charges. No silent failures.",
+            badge: "⚠ Action safely paused"
         }
     }
 };
 
-let currentDemo = null;
+// ===== AUDIT LOG DATA =====
+const sampleAuditEntries = [
+    {
+        timestamp: "2026-01-15 09:02:15",
+        action: "Rent Payment",
+        decision: "Approved",
+        policy: "Balance ≥ $2,000",
+        result: "Scheduled"
+    },
+    {
+        timestamp: "2026-01-15 08:45:33",
+        action: "Bill Categorization",
+        decision: "Automated",
+        policy: "ML Confidence >95%",
+        result: "Success"
+    },
+    {
+        timestamp: "2026-01-15 07:12:08",
+        action: "Payment Failure",
+        decision: "Rejected",
+        policy: "Insufficient Funds",
+        result: "Halted"
+    },
+    {
+        timestamp: "2026-01-14 22:30:45",
+        action: "Subscription Payment",
+        decision: "Approved",
+        policy: "Auto-pay Enabled",
+        result: "Completed"
+    },
+    {
+        timestamp: "2026-01-14 18:15:22",
+        action: "Invoice Received",
+        decision: "Pending Review",
+        policy: "Amount >$5,000",
+        result: "Escalated"
+    }
+];
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    const demoButtons = document.querySelectorAll('.demo-btn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    demoButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const demoType = this.getAttribute('data-type');
-            startDemo(demoType);
-        });
+// ===== SCREEN NAVIGATION =====
+function navigateToScreen(screenNumber) {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
     });
-
-    resetBtn.addEventListener('click', function() {
-        resetDemo();
-    });
-});
-
-function startDemo(type) {
-    currentDemo = demoData[type];
     
-    // Trigger confetti
-    createConfetti();
-    
-    // Hide selector, show demo container
-    document.querySelector('.demo-selector').style.display = 'none';
-    document.getElementById('demoContainer').style.display = 'block';
-    document.getElementById('footerActions').style.display = 'block';
-    
-    // Show typing indicator
-    const typingIndicator = document.getElementById('typingIndicator');
-    typingIndicator.style.display = 'flex';
-    
-    // Start animation sequence
-    setTimeout(() => {
-        typingIndicator.style.display = 'none';
-        animateDemo();
-    }, 2500);
-}
-
-function createConfetti() {
-    const container = document.getElementById('demoContainer');
-    const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
-    
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = (Math.random() * 2 + 2) + 's';
-        container.appendChild(confetti);
+    // Show target screen
+    const targetScreen = document.querySelector(`[data-screen="${screenNumber}"]`);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        currentScreen = screenNumber;
         
-        // Remove after animation
-        setTimeout(() => confetti.remove(), 3000);
+        // Initialize screen-specific content
+        if (screenNumber === 9) {
+            populateAuditLog();
+        }
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-function animateDemo() {
-    const outputSection = document.getElementById('outputSection');
-    let html = '';
+// ===== AI COMMAND CENTER =====
+function loadScenario(scenarioType) {
+    const scenario = scenarios[scenarioType];
+    if (!scenario) return;
     
-    // Executive Summary
-    html += '<div class="executive-summary">';
-    html += '<h2>🎯 Executive Summary</h2>';
-    html += `<p>${currentDemo.executiveSummary}</p>`;
-    html += '</div>';
+    const aiInput = document.getElementById('aiInput');
+    aiInput.value = scenario.input;
     
-    // Section 1: Problems
-    html += '<div class="section-header">⚠️ The Hidden Cost of Manual Operations</div>';
-    html += '<ul class="problem-list">';
-    currentDemo.problems.forEach(problem => {
-        html += `<li class="problem-item">${problem}</li>`;
-    });
-    html += '</ul>';
-    
-    // Section 2: Automations
-    html += '<div class="section-header">✨ Your Competitive Advantage: Automated Operations</div>';
-    html += '<ul class="automation-list">';
-    currentDemo.automations.forEach(automation => {
-        html += `<li class="automation-item">${automation}</li>`;
-    });
-    html += '</ul>';
-    
-    // Section 3: Live Example
-    html += '<div class="section-header">🎬 Live Automation Example</div>';
-    html += `<div class="live-example">`;
-    html += `<h3 style="color: #667eea; margin-bottom: 20px;">${currentDemo.liveExample.title}</h3>`;
-    currentDemo.liveExample.steps.forEach(step => {
-        html += `
-            <div class="example-step">
-                <div class="step-time">${step.time}</div>
-                <div style="font-weight: 600; margin: 8px 0;">${step.action}</div>
-                <div style="color: #666; font-size: 0.95em;">${step.detail}</div>
-            </div>
-        `;
-    });
-    html += '</div>';
-    
-    // Section 4: Time Saved
-    html += '<div class="section-header">💰 Return On Investment</div>';
-    html += `
-        <div class="savings-box">
-            <div class="savings-row">
-                <div class="savings-item">
-                    <div class="savings-label">Time Saved Weekly</div>
-                    <div class="savings-stat">${currentDemo.liveExample.timePerWeek}</div>
-                </div>
-                <div class="savings-item">
-                    <div class="savings-label">Time Saved Monthly</div>
-                    <div class="savings-stat">${currentDemo.liveExample.timePerMonth}</div>
-                </div>
-            </div>
-            <div class="roi-comparison">
-                <div class="roi-box">
-                    <div class="roi-label">Hiring Cost (Annual)</div>
-                    <div class="roi-value cost">$40,000 - $60,000</div>
-                </div>
-                <div class="roi-vs">VS</div>
-                <div class="roi-box">
-                    <div class="roi-label">OperatorX-AI (Annual)</div>
-                    <div class="roi-value savings">$3,588</div>
-                </div>
-            </div>
-            <div class="savings-headline">Save $36,000+ Annually While Scaling Your Business</div>
-        </div>
-    `;
-    
-    // Section 5: Value Statement
-    html += `<div class="value-statement">💡 <strong>Bottom Line:</strong> ${currentDemo.liveExample.value}</div>`;
-    
-    // Call to Action
-    html += `
-        <div class="cta-section">
-            <h3>Ready to Transform Your Business?</h3>
-            <p>Join 1,000+ business owners who have already automated their operations</p>
-            <div class="cta-stats">
-                <div class="cta-stat">4.9/5 ⭐ Rating</div>
-                <div class="cta-stat">30-Day Guarantee</div>
-                <div class="cta-stat">Setup in 24 Hours</div>
-            </div>
-        </div>
-    `;
-    
-    outputSection.innerHTML = html;
-    
-    // Trigger confetti at ROI reveal
+    // Highlight the input field briefly
+    aiInput.style.borderColor = 'var(--color-accent-primary)';
     setTimeout(() => {
-        createConfetti();
-    }, 3500);
+        aiInput.style.borderColor = '';
+    }, 1000);
+}
+
+function executeAI() {
+    if (isExecuting) return;
     
-    // Animate sections appearing with professional timing
-    const sections = outputSection.querySelectorAll('.executive-summary, .section-header, .problem-list, .automation-list, .live-example, .savings-box, .value-statement, .cta-section');
-    sections.forEach((section, index) => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
+    const inputValue = document.getElementById('aiInput').value.trim();
+    
+    if (!inputValue) {
+        alert('Please enter a command or select an example.');
+        return;
+    }
+    
+    // Determine scenario based on input
+    let scenarioType = 'rent'; // default
+    if (inputValue.toLowerCase().includes('bill') || inputValue.toLowerCase().includes('utilities')) {
+        scenarioType = 'bills';
+    } else if (inputValue.toLowerCase().includes('fail') || inputValue.toLowerCase().includes('detect')) {
+        scenarioType = 'failure';
+    }
+    
+    isExecuting = true;
+    
+    // Clear timeline
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+    
+    // Show scenario
+    const scenario = scenarios[scenarioType];
+    
+    // Animate steps
+    scenario.steps.forEach((step, index) => {
         setTimeout(() => {
-            section.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-        }, index * 400);
+            addTimelineStep(step, index);
+            
+            // After last step, show result
+            if (index === scenario.steps.length - 1) {
+                setTimeout(() => {
+                    showScenarioResult(scenarioType);
+                }, 800);
+            }
+        }, index * 600);
     });
 }
 
-function resetDemo() {
-    document.querySelector('.demo-selector').style.display = 'block';
-    document.getElementById('demoContainer').style.display = 'none';
-    document.getElementById('footerActions').style.display = 'none';
-    document.getElementById('outputSection').innerHTML = '';
-    currentDemo = null;
+function addTimelineStep(step, index) {
+    const timeline = document.getElementById('timeline');
+    
+    const stepEl = document.createElement('div');
+    stepEl.className = 'timeline-step';
+    stepEl.style.animationDelay = `${index * 0.1}s`;
+    
+    stepEl.innerHTML = `
+        <div class="step-header">
+            <div class="step-title">${step.title}</div>
+            <div class="step-timestamp">${step.timestamp}</div>
+        </div>
+        <div class="step-content">${step.content}</div>
+        <div class="step-status ${step.status}">
+            ${step.status === 'success' ? '✓ Success' : step.status === 'warning' ? '⚠ Warning' : '✗ Error'}
+        </div>
+    `;
+    
+    timeline.appendChild(stepEl);
+}
+
+function showScenarioResult(scenarioType) {
+    const scenario = scenarios[scenarioType];
+    const scenarioContent = document.getElementById('scenarioContent');
+    
+    if (scenarioType === 'rent') {
+        scenarioContent.innerHTML = `
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-icon">✔</div>
+                    <div class="result-title" style="color: var(--color-accent-success);">${scenario.result.title}</div>
+                </div>
+                <div class="result-details">
+                    ${scenario.result.details.map(detail => `
+                        <div class="result-detail">
+                            <div class="detail-label">${detail.label}</div>
+                            <div class="detail-value">${detail.value}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="side-note">
+                    ${scenario.result.note}
+                </div>
+            </div>
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(7)">View Bill Demo →</button>
+            </div>
+        `;
+    } else if (scenarioType === 'bills') {
+        const billsDemo = document.getElementById('billsDemo');
+        billsDemo.innerHTML = `
+            <div class="bills-flow">
+                ${scenario.bills.map((bill, index) => `
+                    <div class="bill-card" style="animation-delay: ${index * 0.2}s">
+                        <div class="bill-info">
+                            <h4>${bill.name}</h4>
+                            <p>${bill.amount} • Due ${bill.dueDate}</p>
+                            <span class="bill-category">${bill.category}</span>
+                        </div>
+                        <div class="bill-status">
+                            <span class="step-status success">${bill.status}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="result-card mt-xl">
+                <div class="result-header">
+                    <div class="result-icon">📊</div>
+                    <div class="result-title">Automated Bill Management</div>
+                </div>
+                <div class="step-content">
+                    All utility bills detected, categorized, and scheduled for payment.
+                    Calendar synchronized. No manual intervention required.
+                </div>
+            </div>
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(8)">View Failure Handling →</button>
+            </div>
+        `;
+        navigateToScreen(7);
+    } else if (scenarioType === 'failure') {
+        const failureDemo = document.getElementById('failureDemo');
+        failureDemo.innerHTML = `
+            <div class="failure-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">${scenario.alert.title}</div>
+                </div>
+                <div class="step-content">
+                    ${scenario.alert.message}
+                </div>
+                <div class="safety-badge">
+                    🛡️ ${scenario.alert.badge}
+                </div>
+            </div>
+            
+            <div class="timeline-container mt-xl">
+                <h3 style="margin-bottom: var(--space-md); color: var(--color-text-secondary);">
+                    AI Response Timeline
+                </h3>
+                ${scenario.steps.map((step, index) => `
+                    <div class="timeline-step" style="animation-delay: ${index * 0.1}s">
+                        <div class="step-header">
+                            <div class="step-title">${step.title}</div>
+                            <div class="step-timestamp">${step.timestamp}</div>
+                        </div>
+                        <div class="step-content">${step.content}</div>
+                        <div class="step-status ${step.status}">
+                            ${step.status === 'success' ? '✓ Safe' : step.status === 'warning' ? '⚠ Alert' : '✗ Blocked'}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div class="screen-nav">
+                <button class="nav-btn" onclick="navigateToScreen(3)">← Back to Command Center</button>
+                <button class="nav-btn btn-primary" onclick="navigateToScreen(9)">View Audit Log →</button>
+            </div>
+        `;
+        navigateToScreen(8);
+    }
+    
+    navigateToScreen(4);
+    document.getElementById('scenarioTitle').textContent = scenario.title;
+    isExecuting = false;
+}
+
+// ===== AUDIT LOG =====
+function populateAuditLog() {
+    const auditTableBody = document.getElementById('auditTableBody');
+    
+    if (!auditTableBody) return;
+    
+    auditTableBody.innerHTML = sampleAuditEntries.map(entry => `
+        <tr>
+            <td>${entry.timestamp}</td>
+            <td>${entry.action}</td>
+            <td>${entry.decision}</td>
+            <td>${entry.policy}</td>
+            <td>
+                <span class="step-status ${entry.result.toLowerCase().includes('success') || entry.result === 'Completed' || entry.result === 'Scheduled' ? 'success' : entry.result === 'Escalated' || entry.result === 'Pending Review' ? 'warning' : 'danger'}">
+                    ${entry.result}
+                </span>
+            </td>
+        </tr>
+    `).join('');
+}
+
+// ===== ANIMATIONS ON SCROLL =====
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.fade-up, .fade-in-sequence').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+function initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + Right Arrow = Next Screen
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowRight') {
+            if (currentScreen < 12) {
+                navigateToScreen(currentScreen + 1);
+            }
+        }
+        // Ctrl/Cmd + Left Arrow = Previous Screen
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowLeft') {
+            if (currentScreen > 1) {
+                navigateToScreen(currentScreen - 1);
+            }
+        }
+        // Escape = Return to Home
+        if (e.key === 'Escape') {
+            navigateToScreen(1);
+        }
+    });
+}
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Show first screen
+    navigateToScreen(1);
+    
+    // Initialize animations
+    initScrollAnimations();
+    
+    // Initialize keyboard shortcuts
+    initKeyboardShortcuts();
+    
+    // Add Enter key support for AI input
+    const aiInput = document.getElementById('aiInput');
+    if (aiInput) {
+        aiInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                executeAI();
+            }
+        });
+    }
+    
+    console.log('%c🤖 Operatorx-AI Demo Loaded', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts:', 'font-size: 14px; color: #8b5cf6;');
+    console.log('  Ctrl/Cmd + → : Next Screen');
+    console.log('  Ctrl/Cmd + ← : Previous Screen');
+    console.log('  ESC : Return to Home');
+    console.log('  Ctrl/Cmd + Enter (in AI Input) : Execute Command');
+});
+
+// ===== UTILITY FUNCTIONS =====
+function formatTimestamp(date = new Date()) {
+    return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        navigateToScreen,
+        loadScenario,
+        executeAI
+    };
 }
