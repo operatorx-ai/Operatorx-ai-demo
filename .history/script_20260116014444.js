@@ -1932,7 +1932,6 @@ async function playHeroDemo(demoType) {
     
     // Show the demo player
     const demoPlayer = document.getElementById('heroDemoPlayer');
-    demoPlayer.classList.remove('hide-element');
     demoPlayer.style.display = 'block';
     demoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
     
@@ -1943,7 +1942,6 @@ async function playHeroDemo(demoType) {
     const timeline = document.getElementById('heroTimeline');
     const result = document.getElementById('heroResult');
     const impactBanner = document.getElementById('heroImpactBanner');
-    impactBanner.classList.remove('hide-element');
     
     // Clear previous content
     timeline.innerHTML = '';
@@ -1984,7 +1982,6 @@ async function playHeroDemo(demoType) {
     // Show impact banner
     await sleep(500);
     impactBanner.style.display = 'flex';
-    impactBanner.classList.remove('hide-element');
     impactBanner.innerHTML = `
         <div class="impact-text">
             <div class="impact-label">Automatically Handled</div>
@@ -2003,7 +2000,6 @@ async function playHeroDemo(demoType) {
 
 function closeHeroDemo() {
     const demoPlayer = document.getElementById('heroDemoPlayer');
-    demoPlayer.classList.add('hide-element');
     demoPlayer.style.display = 'none';
 }
 

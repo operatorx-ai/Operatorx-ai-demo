@@ -304,6 +304,69 @@ const industryContent = {
         finalCTA: "AI Built for Technology Operations",
         finalCTAButton: "Request Technology Demo"
     },
+        name: "Property Management",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Property Management</span> Operations",
+        heroSubheadline: "Autonomously manage rent collection, tenant payments, and maintenance invoices with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for property management workflows.",
+        screen2Header: "What Operatorx-AI Does for Property Management",
+        card1Desc: "Interprets intent and executes property management operations autonomously.",
+        card2Desc: "Every action follows property management rules and thresholds.",
+        screen3Header: "AI Command Center — Property Management Mode",
+        inputPlaceholder: "Describe the property management operation you want the AI to manage…",
+        quickActions: [
+            { text: "Automate rent collection", scenario: "scenario1" },
+            { text: "Handle late payments", scenario: "scenario2" },
+            { text: "Schedule maintenance invoices", scenario: "scenario3" }
+        ],
+        finalCTA: "AI Built for Property Management Operations",
+        finalCTAButton: "Request Property Management Demo",
+        // ROI Dashboard Data
+        dashboardSubtitle: "Real-world results from property management operations",
+        roiMetrics: [
+            { icon: "💰", value: "$127,000", label: "Monthly Cost Savings", detail: "vs. manual processing" },
+            { icon: "⏱️", value: "340 hrs", label: "Time Reclaimed", detail: "per month" },
+            { icon: "🎯", value: "98%", label: "Rent Collection Rate", detail: "87% manual baseline" },
+            { icon: "📈", value: "12,450", label: "Operations Processed", detail: "this month" }
+        ],
+        beforeAfter: {
+            before: [
+                "⏰ 5 days to process monthly invoices",
+                "👥 2 full-time property managers",
+                "❌ 13% late payment rate",
+                "📊 Weekly manual reconciliation",
+                "🐌 87% rent collection rate"
+            ],
+            beforeCost: "$18,400",
+            after: [
+                "⚡ 4 hours to process monthly invoices",
+                "🤖 0 manual intervention needed",
+                "✅ 2% late payment rate (auto-reminders)",
+                "🎯 Real-time continuous reconciliation",
+                "⚡ 98% rent collection rate"
+            ],
+            afterCost: "$4,200"
+        },
+        businessOutcomes: [
+            {
+                icon: "🛡️",
+                title: "Prevented $45,000 Duplicate Payment",
+                description: "AI detected maintenance invoice already paid under different reference number",
+                badge: "Risk Prevention"
+            },
+            {
+                icon: "🔍",
+                title: "Caught $12,300 Vendor Overcharge",
+                description: "Automatically identified pricing discrepancy in recurring vendor contract",
+                badge: "Cost Recovery"
+            },
+            {
+                icon: "⚡",
+                title: "98% Collection Rate Achieved",
+                description: "Automated reminders and smart scheduling increased collection by 11%",
+                badge: "Revenue Optimization"
+            }
+        ]
+    },
     // --- INDUSTRY: MEDICAL ---
     medical: {
         name: "Medical Practice",
@@ -1188,11 +1251,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1191');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1254');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:1195', err);
+            console.error('Error rendering dynamic content: - script.js:1258', err);
         }
 
         // Initialize screen-specific content
@@ -1476,12 +1539,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1479', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:1480', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:1481');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1482');
-    console.log('ESC : Return to Home - script.js:1483');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1484');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1542', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1543', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1544');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1545');
+    console.log('ESC : Return to Home - script.js:1546');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1547');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -1489,7 +1552,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:1492`);
+    console.log(`Switching to ${content.name}... - script.js:1555`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -1550,7 +1613,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:1553`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1616`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1632,7 +1695,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1635`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1698`);
         return;
     }
     
@@ -1648,22 +1711,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1651');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1714');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1658', this.value);
+                console.log('Organization changed to: - script.js:1721', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1663');
+            console.log('Initializing default organization: property - script.js:1726');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1666');
+            console.error('Organization selector not found! - script.js:1729');
         }
     }, 100);
 });
@@ -1706,7 +1769,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1709');
+        console.error('No scenario found - script.js:1772');
         return;
     }
     
@@ -1932,7 +1995,6 @@ async function playHeroDemo(demoType) {
     
     // Show the demo player
     const demoPlayer = document.getElementById('heroDemoPlayer');
-    demoPlayer.classList.remove('hide-element');
     demoPlayer.style.display = 'block';
     demoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
     
@@ -1943,7 +2005,6 @@ async function playHeroDemo(demoType) {
     const timeline = document.getElementById('heroTimeline');
     const result = document.getElementById('heroResult');
     const impactBanner = document.getElementById('heroImpactBanner');
-    impactBanner.classList.remove('hide-element');
     
     // Clear previous content
     timeline.innerHTML = '';
@@ -1984,7 +2045,6 @@ async function playHeroDemo(demoType) {
     // Show impact banner
     await sleep(500);
     impactBanner.style.display = 'flex';
-    impactBanner.classList.remove('hide-element');
     impactBanner.innerHTML = `
         <div class="impact-text">
             <div class="impact-label">Automatically Handled</div>
@@ -2003,7 +2063,6 @@ async function playHeroDemo(demoType) {
 
 function closeHeroDemo() {
     const demoPlayer = document.getElementById('heroDemoPlayer');
-    demoPlayer.classList.add('hide-element');
     demoPlayer.style.display = 'none';
 }
 

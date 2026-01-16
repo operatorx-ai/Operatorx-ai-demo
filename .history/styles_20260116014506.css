@@ -2,6 +2,7 @@
 .ceo-banner {
     display: flex;
     align-items: center;
+    justify-content: center;
     background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
     color: #fff;
     font-size: 1.1rem;
