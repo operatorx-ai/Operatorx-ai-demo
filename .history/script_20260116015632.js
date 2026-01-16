@@ -1264,11 +1264,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1267');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1191');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:1271', err);
+            console.error('Error rendering dynamic content: - script.js:1195', err);
         }
 
         // Initialize screen-specific content
@@ -1552,12 +1552,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1555', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:1556', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:1557');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1558');
-    console.log('ESC : Return to Home - script.js:1559');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1560');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1479', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1480', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1481');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1482');
+    console.log('ESC : Return to Home - script.js:1483');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1484');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -1565,7 +1565,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:1568`);
+    console.log(`Switching to ${content.name}... - script.js:1492`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -1626,7 +1626,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:1629`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1553`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1708,7 +1708,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1711`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1635`);
         return;
     }
     
@@ -1724,22 +1724,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1727');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1651');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1734', this.value);
+                console.log('Organization changed to: - script.js:1658', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1739');
+            console.log('Initializing default organization: property - script.js:1663');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1742');
+            console.error('Organization selector not found! - script.js:1666');
         }
     }, 100);
 });
@@ -1782,7 +1782,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1785');
+        console.error('No scenario found - script.js:1709');
         return;
     }
     

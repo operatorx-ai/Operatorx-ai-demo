@@ -430,82 +430,6 @@ const industryContent = {
 
 // ===== INDUSTRY-SPECIFIC SCENARIOS =====
 const industryScenarios = {
-        // --- DYNAMICALLY ADDED INDUSTRIES (DEFAULT DEMOS) ---
-        education: {
-            scenario1: {
-                title: "Tuition Payment Reminder",
-                input: "Send tuition payment reminders to all students.",
-                steps: [
-                    { title: "Intent Identified", content: "Detected tuition payment reminder workflow.", status: "success", timestamp: "09:00:01" },
-                    { title: "Policy Validation", content: "Checked student account status.", status: "success", timestamp: "09:00:02" },
-                    { title: "Notification Sent", content: "Reminders sent to all overdue accounts.", status: "success", timestamp: "09:00:03" },
-                    { title: "Result Logged", content: "All actions recorded for compliance.", status: "success", timestamp: "09:00:04" }
-                ],
-                result: { title: "Reminders Sent", details: [ { label: "Students Notified", value: "142" } ], note: "All overdue accounts have been notified." }
-            },
-            scenario2: {
-                title: "Scholarship Disbursement",
-                input: "Disburse scholarships based on eligibility.",
-                steps: [
-                    { title: "Eligibility Check", content: "Verified all scholarship criteria.", status: "success", timestamp: "10:00:01" },
-                    { title: "Funds Allocated", content: "Funds allocated to eligible students.", status: "success", timestamp: "10:00:02" },
-                    { title: "Disbursement Executed", content: "Scholarship payments processed.", status: "success", timestamp: "10:00:03" },
-                    { title: "Audit Trail Updated", content: "All transactions logged.", status: "success", timestamp: "10:00:04" }
-                ],
-                result: { title: "Scholarships Disbursed", details: [ { label: "Total Disbursed", value: "$48,000" } ], note: "All eligible students have received funds." }
-            },
-            scenario3: {
-                title: "Grant Spending Tracking",
-                input: "Track grant spending for compliance.",
-                steps: [
-                    { title: "Grant Identified", content: "Grant spending detected.", status: "success", timestamp: "11:00:01" },
-                    { title: "Spending Categorized", content: "All expenses categorized.", status: "success", timestamp: "11:00:02" },
-                    { title: "Compliance Checked", content: "Spending reviewed for compliance.", status: "success", timestamp: "11:00:03" },
-                    { title: "Report Generated", content: "Compliance report generated.", status: "success", timestamp: "11:00:04" }
-                ],
-                result: { title: "Grant Report Ready", details: [ { label: "Total Grants", value: "$120,000" } ], note: "All spending is compliant." }
-            }
-        },
-        manufacturing: {
-            scenario1: { title: "Supplier Payment Automation", input: "Automate supplier payments on delivery.", steps: [ { title: "Intent Identified", content: "Supplier payment workflow detected.", status: "success", timestamp: "09:00:01" }, { title: "Delivery Confirmed", content: "Goods received and verified.", status: "success", timestamp: "09:00:02" }, { title: "Payment Approved", content: "Payment authorized for supplier.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Payment Completed", details: [ { label: "Supplier", value: "Acme Parts" } ], note: "Payment processed after delivery confirmation." } },
-            scenario2: { title: "Inventory Shortage Alert", input: "Flag inventory shortages for urgent restock.", steps: [ { title: "Shortage Detected", content: "Inventory below threshold.", status: "warning", timestamp: "10:00:01" }, { title: "Restock Order Created", content: "Urgent restock order placed.", status: "success", timestamp: "10:00:02" }, { title: "Vendor Notified", content: "Vendor notified for expedited delivery.", status: "success", timestamp: "10:00:03" }, { title: "Status Updated", content: "Inventory status updated.", status: "success", timestamp: "10:00:04" } ], alert: { title: "Inventory Low", message: "Urgent restock order placed.", badge: "⚠ Vendor Notified" } },
-            scenario3: { title: "Safety Report Generation", input: "Generate safety reports.", steps: [ { title: "Report Requested", content: "Safety report generation started.", status: "success", timestamp: "11:00:01" }, { title: "Data Aggregated", content: "All safety data collected.", status: "success", timestamp: "11:00:02" }, { title: "Compliance Checked", content: "All incidents reviewed.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Safety report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Safety Report Ready", details: [ { label: "Incidents", value: "0" } ], note: "No safety incidents this month." } }
-        },
-        hospitality: {
-            scenario1: { title: "Vendor Payment Automation", input: "Automate vendor payments for supplies.", steps: [ { title: "Intent Identified", content: "Vendor payment workflow detected.", status: "success", timestamp: "09:00:01" }, { title: "Invoice Verified", content: "All invoices checked.", status: "success", timestamp: "09:00:02" }, { title: "Payment Approved", content: "Payment authorized for vendor.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Payment Completed", details: [ { label: "Vendor", value: "Hotel Supplies Co." } ], note: "Payment processed for all verified invoices." } },
-            scenario2: { title: "Room Allocation Optimization", input: "Optimize room allocation.", steps: [ { title: "Overbooking Detected", content: "Room allocation optimized.", status: "success", timestamp: "10:00:01" }, { title: "Guests Reassigned", content: "Guests reassigned to available rooms.", status: "success", timestamp: "10:00:02" }, { title: "Status Updated", content: "Room status updated.", status: "success", timestamp: "10:00:03" }, { title: "Report Generated", content: "Allocation report generated.", status: "success", timestamp: "10:00:04" } ], result: { title: "Rooms Optimized", details: [ { label: "Rooms Allocated", value: "120" } ], note: "All guests accommodated." } },
-            scenario3: { title: "Guest Feedback Tracking", input: "Track guest feedback for service improvement.", steps: [ { title: "Feedback Collected", content: "All guest feedback collected.", status: "success", timestamp: "11:00:01" }, { title: "Sentiment Analyzed", content: "Feedback sentiment analyzed.", status: "success", timestamp: "11:00:02" }, { title: "Action Items Created", content: "Improvement actions created.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Feedback report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Feedback Report Ready", details: [ { label: "Positive Feedback", value: "92%" } ], note: "Service improvement plan created." } }
-        },
-        energy: {
-            scenario1: { title: "Utility Bill Processing", input: "Automate utility bill processing.", steps: [ { title: "Bill Detected", content: "Utility bill detected and categorized.", status: "success", timestamp: "09:00:01" }, { title: "Usage Verified", content: "Usage data verified.", status: "success", timestamp: "09:00:02" }, { title: "Payment Approved", content: "Bill payment authorized.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Bill Paid", details: [ { label: "Amount", value: "$2,300" } ], note: "Utility bill processed and paid." } },
-            scenario2: { title: "Usage Spike Investigation", input: "Flag abnormal usage spikes for investigation.", steps: [ { title: "Spike Detected", content: "Abnormal usage spike detected.", status: "warning", timestamp: "10:00:01" }, { title: "Investigation Started", content: "Usage data under review.", status: "success", timestamp: "10:00:02" }, { title: "Root Cause Identified", content: "Cause of spike identified.", status: "success", timestamp: "10:00:03" }, { title: "Report Generated", content: "Investigation report generated.", status: "success", timestamp: "10:00:04" } ], alert: { title: "Usage Spike", message: "Abnormal usage investigated.", badge: "⚠ Investigation Complete" } },
-            scenario3: { title: "Maintenance Scheduling", input: "Optimize maintenance scheduling for assets.", steps: [ { title: "Assets Identified", content: "All assets scheduled for maintenance.", status: "success", timestamp: "11:00:01" }, { title: "Schedule Created", content: "Maintenance schedule created.", status: "success", timestamp: "11:00:02" }, { title: "Vendors Notified", content: "Vendors notified for service.", status: "success", timestamp: "11:00:03" }, { title: "Status Updated", content: "Maintenance status updated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Maintenance Scheduled", details: [ { label: "Assets Serviced", value: "18" } ], note: "All maintenance scheduled for this month." } }
-        },
-        nonprofit: {
-            scenario1: { title: "Donor Receipt Generation", input: "Automate donor receipt generation.", steps: [ { title: "Donation Detected", content: "Donation received and logged.", status: "success", timestamp: "09:00:01" }, { title: "Receipt Generated", content: "Receipt generated for donor.", status: "success", timestamp: "09:00:02" }, { title: "Email Sent", content: "Receipt emailed to donor.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Receipts Sent", details: [ { label: "Donors Notified", value: "37" } ], note: "All donors have received receipts." } },
-            scenario2: { title: "Grant Spending Tracking", input: "Track grant spending and compliance.", steps: [ { title: "Grant Detected", content: "Grant spending detected.", status: "success", timestamp: "10:00:01" }, { title: "Spending Categorized", content: "All expenses categorized.", status: "success", timestamp: "10:00:02" }, { title: "Compliance Checked", content: "Spending reviewed for compliance.", status: "success", timestamp: "10:00:03" }, { title: "Report Generated", content: "Compliance report generated.", status: "success", timestamp: "10:00:04" } ], result: { title: "Grant Report Ready", details: [ { label: "Total Grants", value: "$42,000" } ], note: "All spending is compliant." } },
-            scenario3: { title: "Fundraising Campaign Scheduling", input: "Schedule recurring fundraising campaigns.", steps: [ { title: "Campaign Scheduled", content: "Fundraising campaign scheduled.", status: "success", timestamp: "11:00:01" }, { title: "Donors Notified", content: "All donors notified.", status: "success", timestamp: "11:00:02" }, { title: "Funds Collected", content: "Funds collected and logged.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Campaign report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Campaign Complete", details: [ { label: "Funds Raised", value: "$8,900" } ], note: "Campaign completed successfully." } }
-        },
-        content: {
-            scenario1: { title: "Sponsor Invoice Automation", input: "Automate invoice generation for sponsors.", steps: [ { title: "Intent Identified", content: "Sponsor invoice workflow detected.", status: "success", timestamp: "09:00:01" }, { title: "Invoice Created", content: "Invoice generated for sponsor.", status: "success", timestamp: "09:00:02" }, { title: "Sent to Sponsor", content: "Invoice sent to sponsor.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Invoice Sent", details: [ { label: "Sponsor", value: "BrandX" } ], note: "Sponsor has received the invoice." } },
-            scenario2: { title: "Content Performance Tracking", input: "Track content performance across platforms.", steps: [ { title: "Performance Data Collected", content: "All platform data collected.", status: "success", timestamp: "10:00:01" }, { title: "Analytics Generated", content: "Performance analytics generated.", status: "success", timestamp: "10:00:02" }, { title: "Insights Shared", content: "Insights shared with creator.", status: "success", timestamp: "10:00:03" }, { title: "Report Ready", content: "Performance report generated.", status: "success", timestamp: "10:00:04" } ], result: { title: "Performance Report Ready", details: [ { label: "Views", value: "1.2M" } ], note: "Analytics delivered to creator." } },
-            scenario3: { title: "Content Scheduling Automation", input: "Schedule and post content to all channels.", steps: [ { title: "Content Scheduled", content: "Content scheduled for all channels.", status: "success", timestamp: "11:00:01" }, { title: "Posts Published", content: "Content published to all platforms.", status: "success", timestamp: "11:00:02" }, { title: "Engagement Tracked", content: "Engagement tracked across channels.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Scheduling report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Content Posted", details: [ { label: "Channels", value: "7" } ], note: "Content posted to all channels." } }
-        },
-        legal: {
-            scenario1: { title: "Client Billing Automation", input: "Automate client billing and invoicing.", steps: [ { title: "Intent Identified", content: "Client billing workflow detected.", status: "success", timestamp: "09:00:01" }, { title: "Invoice Generated", content: "Invoice generated for client.", status: "success", timestamp: "09:00:02" }, { title: "Sent to Client", content: "Invoice sent to client.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Invoice Sent", details: [ { label: "Client", value: "Acme Corp" } ], note: "Client has received the invoice." } },
-            scenario2: { title: "Case Expense Tracking", input: "Track case expenses and budgets.", steps: [ { title: "Expense Detected", content: "Case expense detected and categorized.", status: "success", timestamp: "10:00:01" }, { title: "Budget Checked", content: "Budget checked for case.", status: "success", timestamp: "10:00:02" }, { title: "Expense Approved", content: "Expense approved for case.", status: "success", timestamp: "10:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "10:00:04" } ], result: { title: "Expense Approved", details: [ { label: "Case", value: "Smith v. Jones" } ], note: "Expense approved and logged." } },
-            scenario3: { title: "Compliance Log Generation", input: "Generate compliance and audit logs.", steps: [ { title: "Log Requested", content: "Compliance log generation started.", status: "success", timestamp: "11:00:01" }, { title: "Data Aggregated", content: "All compliance data collected.", status: "success", timestamp: "11:00:02" }, { title: "Log Generated", content: "Compliance log generated.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Audit log report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Audit Log Ready", details: [ { label: "Entries", value: "24" } ], note: "Audit log generated for review." } }
-        },
-        construction: {
-            scenario1: { title: "Subcontractor Payment Automation", input: "Automate subcontractor payments on milestone completion.", steps: [ { title: "Milestone Completed", content: "Subcontractor milestone verified.", status: "success", timestamp: "09:00:01" }, { title: "Payment Approved", content: "Payment authorized for subcontractor.", status: "success", timestamp: "09:00:02" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:03" }, { title: "Audit Trail Updated", content: "Audit trail updated for compliance.", status: "success", timestamp: "09:00:04" } ], result: { title: "Payment Completed", details: [ { label: "Subcontractor", value: "BuildCo" } ], note: "Payment processed after milestone completion." } },
-            scenario2: { title: "Cost Overrun Alert", input: "Flag cost overruns for project manager review.", steps: [ { title: "Overrun Detected", content: "Cost overrun detected for project.", status: "warning", timestamp: "10:00:01" }, { title: "Manager Notified", content: "Project manager notified for review.", status: "success", timestamp: "10:00:02" }, { title: "Review Scheduled", content: "Review meeting scheduled.", status: "success", timestamp: "10:00:03" }, { title: "Status Updated", content: "Project status updated.", status: "success", timestamp: "10:00:04" } ], alert: { title: "Cost Overrun", message: "Project manager notified for review.", badge: "⚠ Review Required" } },
-            scenario3: { title: "Safety Report Scheduling", input: "Generate safety reports.", steps: [ { title: "Report Requested", content: "Safety report generation started.", status: "success", timestamp: "11:00:01" }, { title: "Data Aggregated", content: "All safety data collected.", status: "success", timestamp: "11:00:02" }, { title: "Compliance Checked", content: "All incidents reviewed.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Safety report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Safety Report Ready", details: [ { label: "Incidents", value: "0" } ], note: "No safety incidents this month." } }
-        },
-        technology: {
-            scenario1: { title: "SaaS Billing Automation", input: "Automate SaaS subscription billing.", steps: [ { title: "Subscription Detected", content: "SaaS subscription detected and categorized.", status: "success", timestamp: "09:00:01" }, { title: "Usage Verified", content: "Usage data verified.", status: "success", timestamp: "09:00:02" }, { title: "Billing Approved", content: "Subscription billing authorized.", status: "success", timestamp: "09:00:03" }, { title: "Transaction Logged", content: "All actions recorded.", status: "success", timestamp: "09:00:04" } ], result: { title: "Billing Completed", details: [ { label: "Account", value: "Acme SaaS" } ], note: "Subscription billing processed." } },
-            scenario2: { title: "Churn Risk Tracking", input: "Flag churn risk accounts for outreach.", steps: [ { title: "Churn Risk Detected", content: "Churn risk account detected.", status: "warning", timestamp: "10:00:01" }, { title: "Outreach Scheduled", content: "Outreach scheduled for account.", status: "success", timestamp: "10:00:02" }, { title: "Status Updated", content: "Account status updated.", status: "success", timestamp: "10:00:03" }, { title: "Report Generated", content: "Churn risk report generated.", status: "success", timestamp: "10:00:04" } ], alert: { title: "Churn Risk", message: "Outreach scheduled for at-risk account.", badge: "⚠ Outreach Required" } },
-            scenario3: { title: "Uptime Report Generation", input: "Generate uptime and incident reports.", steps: [ { title: "Report Requested", content: "Uptime report generation started.", status: "success", timestamp: "11:00:01" }, { title: "Data Aggregated", content: "All uptime data collected.", status: "success", timestamp: "11:00:02" }, { title: "Incidents Reviewed", content: "All incidents reviewed.", status: "success", timestamp: "11:00:03" }, { title: "Report Ready", content: "Uptime report generated.", status: "success", timestamp: "11:00:04" } ], result: { title: "Uptime Report Ready", details: [ { label: "Uptime", value: "99.98%" } ], note: "All incidents reviewed." } }
-        },
     property: {
         scenario1: {
             title: "Rent Collection Automation",
@@ -1264,11 +1188,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1267');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:1191');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:1271', err);
+            console.error('Error rendering dynamic content: - script.js:1195', err);
         }
 
         // Initialize screen-specific content
@@ -1552,12 +1476,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1555', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:1556', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:1557');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1558');
-    console.log('ESC : Return to Home - script.js:1559');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1560');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1479', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1480', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1481');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1482');
+    console.log('ESC : Return to Home - script.js:1483');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1484');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -1565,7 +1489,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:1568`);
+    console.log(`Switching to ${content.name}... - script.js:1492`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -1626,7 +1550,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:1629`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1553`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1708,7 +1632,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1711`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1635`);
         return;
     }
     
@@ -1724,22 +1648,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1727');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1651');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1734', this.value);
+                console.log('Organization changed to: - script.js:1658', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1739');
+            console.log('Initializing default organization: property - script.js:1663');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1742');
+            console.error('Organization selector not found! - script.js:1666');
         }
     }, 100);
 });
@@ -1782,7 +1706,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1785');
+        console.error('No scenario found - script.js:1709');
         return;
     }
     
