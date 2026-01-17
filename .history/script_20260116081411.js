@@ -1725,12 +1725,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1728', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:1729', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:1730');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1731');
-    console.log('ESC : Return to Home - script.js:1732');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1733');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1555', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1556', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1557');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1558');
+    console.log('ESC : Return to Home - script.js:1559');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1560');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -1738,7 +1738,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:1741`);
+    console.log(`Switching to ${content.name}... - script.js:1568`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -1799,7 +1799,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:1802`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1629`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1881,7 +1881,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1884`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1711`);
         return;
     }
     
@@ -1897,22 +1897,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1900');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1727');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1907', this.value);
+                console.log('Organization changed to: - script.js:1734', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1912');
+            console.log('Initializing default organization: property - script.js:1739');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1915');
+            console.error('Organization selector not found! - script.js:1742');
         }
     }, 100);
 });
@@ -1955,7 +1955,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1958');
+        console.error('No scenario found - script.js:1785');
         return;
     }
     
