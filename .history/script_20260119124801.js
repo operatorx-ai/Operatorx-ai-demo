@@ -195,11 +195,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:198');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:334');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:202', err);
+            console.error('Error rendering dynamic content: - script.js:338', err);
         }
 
         // Initialize screen-specific content
@@ -922,12 +922,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:925', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:926', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:927');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:928');
-    console.log('ESC : Return to Home - script.js:929');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:930');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1061', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1062', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1063');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1064');
+    console.log('ESC : Return to Home - script.js:1065');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1066');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -935,7 +935,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:938`);
+    console.log(`Switching to ${content.name}... - script.js:1074`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -996,7 +996,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:999`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1135`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1078,7 +1078,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1081`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1217`);
         return;
     }
     
@@ -1094,22 +1094,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1097');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1233');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1104', this.value);
+                console.log('Organization changed to: - script.js:1240', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1109');
+            console.log('Initializing default organization: property - script.js:1245');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1112');
+            console.error('Organization selector not found! - script.js:1248');
         }
     }, 100);
 });
@@ -1152,7 +1152,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1155');
+        console.error('No scenario found - script.js:1291');
         return;
     }
     
@@ -1549,7 +1549,15 @@ document.addEventListener('DOMContentLoaded', () => {
     startPlaceholderRotation();
 });
 
-
-// Ensure demo functions are available globally for HTML event handlers
-window.playHeroDemo = playHeroDemo;
-window.closeHeroDemo = closeHeroDemo;
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        navigateToScreen,
+        loadScenario,
+        executeAI,
+        switchOrganization,
+        playHeroDemo,
+        closeHeroDemo,
+        startPlaceholderRotation
+    };
+}

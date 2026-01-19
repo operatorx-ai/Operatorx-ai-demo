@@ -1,3 +1,67 @@
+// ========================================
+// OPERATORX-AI - PRODUCTION DEMO ENGINE
+// Enterprise AI Operations Platform
+// ========================================
+// ===== GLOBAL STATE =====
+let currentScreen = 1;
+let isExecuting = false;
+const auditLog = [];
+
+// ===== INDUSTRY-SPECIFIC CONTENT =====
+const industryContent = {
+    technology: {
+        name: "Technology / SaaS",
+        heroHeadline: "An AI Operator Built for <span class='gradient-text'>Technology</span> Operations",
+        heroSubheadline: "Autonomously manage subscriptions, feature usage, and compliance with policy-driven AI execution.",
+        ctaMicro: "Simulated enterprise environment for technology workflows.",
+        screen2Header: "What Operatorx-AI Does for Technology",
+        card1Desc: "Interprets intent and executes technology operations autonomously.",
+        card2Desc: "Every action follows technology compliance rules and thresholds.",
+        screen3Header: "AI Command Center — Technology Mode",
+        inputPlaceholder: "Describe the technology operation you want the AI to manage…",
+        quickActions: [
+            { text: "Automate SaaS billing", scenario: "scenario1" },
+        },
+        scenario3: {
+            title: "Subscription Service Monitoring",
+            input: "Monitor medical software subscriptions",
+            steps: [
+                {
+                    title: "Subscription renewal detected",
+                    content: "Medical software subscription identified.<br>Service: EMR Platform<br>Amount: $850/month",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Usage validation",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Report compilation",
+                    content: "Audit trail formatted for review.<br>Format: PDF + CSV exports",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Report ready",
+                    content: "Quarterly audit report generated.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Report available</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Audit Report Generated",
+                details: [
+                    { label: "Period", value: "Q4 2025" },
+                    { label: "Transactions", value: "1,247" },
+                    { label: "Total Disbursed", value: "$2,400,000.00" },
+                    { label: "Format", value: "PDF + CSV" }
+                ],
+                note: "Report includes complete audit trail for all transactions."
+            }
+        }
+    }
+};
 
 // ===== LEGACY SCENARIO DATA (for backwards compatibility) =====
 const scenarios = {
@@ -195,11 +259,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:198');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:262');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:202', err);
+            console.error('Error rendering dynamic content: - script.js:266', err);
         }
 
         // Initialize screen-specific content
@@ -213,493 +277,220 @@ function navigateToScreen(screenNumber) {
 }
 
 // ===== INDUSTRY-SPECIFIC SCENARIOS =====
-const industryScenarios = {
-    property: {
-        scenario1: {
-            title: "Rent Collection Automation",
-            input: "Collect rent on the 1st unless occupancy is below 90%.",
-            steps: [
-                {
-                    title: "Intent Identified",
-                    content: "Recurring rent collection detected.<br><strong>Frequency:</strong> Monthly<br><strong>Conditional logic applied</strong>",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Policy Validation",
-                    content: "Collection rules verified against property management policies.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Condition Verification",
-                    content: "Occupancy rate evaluated.<br><strong>Current occupancy:</strong> 94%<br><strong>Required minimum:</strong> 90%",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Decision Engine",
-                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
+            title: "Attendance Tracked & Alerts Sent",
+            details: [
+                { label: "Total Students", value: "32" },
+                { label: "Absent", value: "2" },
+                { label: "Alerts Sent", value: "2" }
             ],
-            result: {
-                title: "Operation Approved",
-                details: [
-                    { label: "Action", value: "Rent Collection" },
-                    { label: "Amount", value: "$28,450.00" },
-                    { label: "Execution Date", value: "February 1, 2026" },
-                    { label: "Method", value: "ACH" }
-                ],
-                note: "Conditions are re-evaluated before every execution."
-            }
-        },
-        scenario2: {
-            title: "Late Payment Handling",
-            input: "Automated workflow detected from transaction feed",
-            steps: [
-                {
-                    title: "Late payment detected from transaction feed",
-                    content: "Payment delay identified and categorized.<br><strong>Category:</strong> Late Payment",
-                    status: "success",
-                    timestamp: "10:30:01"
-                },
-                {
-                    title: "Category: Delinquent Accounts",
-                    content: "Payments categorized automatically.<br>AI confidence: 98%",
-                    status: "success",
-                    timestamp: "10:30:02"
-                },
-                {
-                    title: "Grace period evaluated",
-                    content: "Policy thresholds checked<br>Notification scheduled",
-                    status: "success",
-                    timestamp: "10:30:03"
-                },
-                {
-                    title: "Reminder scheduled",
-                    content: "Automated notification queued<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span><br><span style='font-size: 0.75rem; color: var(--color-text-tertiary); display: block; margin-top: 0.5rem;'>No manual intervention required.</span>",
-                    status: "success",
-                    timestamp: "10:30:04"
-                }
-            ]
-        },
-        scenario3: {
-            title: "Maintenance Invoice Scheduling",
-            input: "Simulated: Payment failed due to insufficient funds",
-            steps: [
-                {
-                    title: "Failure detected",
-                    content: "A payment attempt failed due to insufficient funds.<br>Maintenance invoice: $2,150.00<br>Account balance: $1,280.50",
-                    status: "danger",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Transaction halted",
-                    content: "Payment execution stopped immediately.<br>Zero duplicate charge risk",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Retry scheduled",
-                    content: "Automatic retry in 24 hours<br>Policy: Max 3 attempts",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "User notification generated",
-                    content: "Alert sent to property manager<br>Manual review available",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
-            ],
-            alert: {
-                title: "Execution Paused",
-                message: "A payment attempt failed due to insufficient funds. No duplicate charges. No silent failures.",
-                badge: "⚠ Action safely paused"
-            }
+            note: "Automated follow-up for chronic absences."
         }
     },
-    medical: {
-        scenario1: {
-            title: "Lab Payment Automation",
-            input: "Pay lab invoices weekly unless charges exceed $10,000.",
-            steps: [
-                {
-                    title: "Intent Identified",
-                    content: "Recurring lab payment detected.<br><strong>Frequency:</strong> Weekly<br><strong>Conditional logic applied</strong>",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Policy Validation",
-                    content: "Healthcare payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Compliance satisfied</span>",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Condition Verification",
-                    content: "Invoice amount evaluated.<br><strong>Current total:</strong> $7,340.50<br><strong>Threshold limit:</strong> $10,000",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Decision Engine",
-                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
+    manufacturing: {
+        title: "Predictive Maintenance Scheduling",
+        input: "Monitor machine health and schedule maintenance before failures.",
+        steps: [
+            { title: "Sensor Data Analyzed", content: "Vibration and temperature data processed.", status: "success", timestamp: "07:30:01" },
+            { title: "Anomaly Detected", content: "Elevated vibration on Line 2. Maintenance flagged.", status: "warning", timestamp: "07:30:05" },
+            { title: "Work Order Created", content: "Maintenance work order auto-generated for Line 2.", status: "success", timestamp: "07:30:10" },
+            { title: "Team Notified", content: "Maintenance team notified via app and email.", status: "success", timestamp: "07:30:15" }
+        ],
+        result: {
+            title: "Maintenance Scheduled Successfully",
+            details: [
+                { label: "Line", value: "2" },
+                { label: "Issue", value: "Vibration anomaly" },
+                { label: "Scheduled Date", value: "Jan 18, 2026" }
             ],
-            result: {
-                title: "Operation Scheduled",
-                details: [
-                    { label: "Action", value: "Lab Payment" },
-                    { label: "Amount", value: "$7,340.50" },
-                    { label: "Execution Date", value: "January 22, 2026" },
-                    { label: "Method", value: "ACH" }
-                ],
-                note: "Conditions are re-evaluated before every execution."
-            }
-        },
-        scenario2: {
-            title: "Insurance Invoice Categorization",
-            input: "Automated workflow detected",
-            steps: [
-                {
-                    title: "Insurance invoice detected from transaction feed",
-                    content: "Invoice identified and categorized.<br><strong>Category:</strong> Insurance Claims",
-                    status: "success",
-                    timestamp: "10:30:01"
-                },
-                {
-                    title: "Category: Insurance Billing",
-                    content: "Claims categorized automatically.<br>AI confidence: 97%",
-                    status: "success",
-                    timestamp: "10:30:02"
-                },
-                {
-                    title: "Claim verification scheduled",
-                    content: "Authorization status checked<br>Payment queue updated",
-                    status: "success",
-                    timestamp: "10:30:03"
-                },
-                {
-                    title: "Payment prepared",
-                    content: "Invoice queued for processing<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
-                    status: "success",
-                    timestamp: "10:30:04"
-                }
-            ]
-        },
-        scenario3: {
-            title: "Subscription Service Monitoring",
-            input: "Monitor medical software subscriptions",
-            steps: [
-                {
-                    title: "Subscription renewal detected",
-                    content: "Medical software subscription identified.<br>Service: EMR Platform<br>Amount: $850/month",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Usage validation",
-                    content: "Service utilization verified.<br>Active users: 12<br>License compliance: ✔",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Budget check",
-                    content: "Spending allocation verified.<br><strong>IT Budget remaining:</strong> $15,400",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Renewal approved",
-                    content: "Payment authorized and scheduled.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
-            ],
-            result: {
-                title: "Subscription Renewed",
-                details: [
-                    { label: "Action", value: "EMR Platform Renewal" },
-                    { label: "Amount", value: "$850.00" },
-                    { label: "Execution Date", value: "February 1, 2026" },
-                    { label: "Method", value: "Credit Card" }
-                ],
-                note: "Auto-renewal active. Manual cancellation available anytime."
-            }
+            note: "Downtime risk reduced by 80%."
         }
     },
-    logistics: {
-        scenario1: {
-            title: "Carrier Payment Automation",
-            input: "Pay carriers within net-15 if delivery is confirmed.",
-            steps: [
-                {
-                    title: "Intent Identified",
-                    content: "Carrier payment detected.<br><strong>Payment terms:</strong> Net-15<br><strong>Conditional logic applied</strong>",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Policy Validation",
-                    content: "Logistics payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Condition Verification",
-                    content: "Delivery confirmation checked.<br><strong>Status:</strong> Delivered<br><strong>Proof of delivery:</strong> Verified",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Decision Engine",
-                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
+    hospitality: {
+        title: "Guest Experience Automation",
+        input: "Personalize guest room settings upon check-in.",
+        steps: [
+            { title: "Reservation Detected", content: "Guest John Doe checked in.", status: "success", timestamp: "15:00:01" },
+            { title: "Preferences Loaded", content: "Room temperature set to 72°F, favorite music playlist started.", status: "success", timestamp: "15:00:05" },
+            { title: "Welcome Message Sent", content: "Personalized welcome sent to guest's phone.", status: "success", timestamp: "15:00:10" },
+// ===== INDUSTRY-SPECIFIC SCENARIOS =====
+const _industryScenarios_patch = {
+    education: {
+        title: "Automated Student Attendance",
+        input: "Track student attendance and send alerts for absences.",
+        steps: [
+            { title: "Attendance Data Synced", content: "Student check-in data received from smart devices.", status: "success", timestamp: "08:05:01" },
+            { title: "Absence Detected", content: "2 students absent. Automated alert triggered.", status: "warning", timestamp: "08:05:10" },
+            { title: "Parent Notification", content: "SMS/email sent to parents for absent students.", status: "success", timestamp: "08:05:15" },
+            { title: "Dashboard Updated", content: "Attendance dashboard refreshed for teachers and admins.", status: "success", timestamp: "08:05:20" }
+        ],
+        result: {
+            title: "Attendance Tracked & Alerts Sent",
+            details: [
+                { label: "Total Students", value: "32" },
+                { label: "Absent", value: "2" },
+                { label: "Alerts Sent", value: "2" }
             ],
-            result: {
-                title: "Payment Scheduled",
-                details: [
-                    { label: "Action", value: "Carrier Payment" },
-                    { label: "Amount", value: "$4,250.00" },
-                    { label: "Execution Date", value: "January 28, 2026" },
-                    { label: "Method", value: "ACH" }
-                ],
-                note: "Payment released only after delivery confirmation."
-            }
-        },
-        scenario2: {
-            title: "Fuel Expense Tracking",
-            input: "Automated fuel expense categorization",
-            steps: [
-                {
-                    title: "Fuel expense detected from transaction feed",
-                    content: "Transaction identified and categorized.<br><strong>Category:</strong> Fleet Fuel",
-                    status: "success",
-                    timestamp: "10:30:01"
-                },
-                {
-                    title: "Category: Operations Expense",
-                    content: "Expenses categorized automatically.<br>AI confidence: 99%",
-                    status: "success",
-                    timestamp: "10:30:02"
-                },
-                {
-                    title: "Budget allocation checked",
-                    content: "Spending limits verified<br>Fleet budget: Within limits",
-                    status: "success",
-                    timestamp: "10:30:03"
-                },
-                {
-                    title: "Expense logged",
-                    content: "Transaction recorded and approved<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
-                    status: "success",
-                    timestamp: "10:30:04"
-                }
-            ]
-        },
-        scenario3: {
-            title: "Delayed Invoice Dispute",
-            input: "Simulated: Invoice dispute detected",
-            steps: [
-                {
-                    title: "Dispute detected",
-                    content: "Invoice discrepancy identified.<br>Expected: $3,200<br>Invoiced: $4,150",
-                    status: "warning",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Payment halted",
-                    content: "Transaction paused for review.<br>Dispute flag raised",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Review queued",
-                    content: "Manual review requested<br>Vendor contacted automatically",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Resolution pending",
-                    content: "Awaiting vendor response<br>Payment on hold until resolved",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
-            ],
-            alert: {
-                title: "Payment Under Review",
-                message: "Invoice discrepancy detected. Payment paused until dispute is resolved. No unauthorized charges.",
-                badge: "⚠ Manual review required"
-            }
+            note: "Automated follow-up for chronic absences."
         }
     },
-    retail: {
-        scenario1: {
-            title: "Vendor Payment Automation",
-            input: "Pay vendors monthly after inventory reconciliation.",
-            steps: [
-                {
-                    title: "Intent Identified",
-                    content: "Vendor payment detected.<br><strong>Frequency:</strong> Monthly<br><strong>Conditional logic applied</strong>",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Policy Validation",
-                    content: "Retail payment rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Policies satisfied</span>",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Condition Verification",
-                    content: "Inventory reconciliation completed.<br><strong>Match status:</strong> 98% match<br><strong>Discrepancies:</strong> Resolved",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Decision Engine",
-                    content: "Conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
+    manufacturing: {
+        title: "Predictive Maintenance Scheduling",
+        input: "Monitor machine health and schedule maintenance before failures.",
+        steps: [
+            { title: "Sensor Data Analyzed", content: "Vibration and temperature data processed.", status: "success", timestamp: "07:30:01" },
+            { title: "Anomaly Detected", content: "Elevated vibration on Line 2. Maintenance flagged.", status: "warning", timestamp: "07:30:05" },
+            { title: "Work Order Created", content: "Maintenance work order auto-generated for Line 2.", status: "success", timestamp: "07:30:10" },
+            { title: "Team Notified", content: "Maintenance team notified via app and email.", status: "success", timestamp: "07:30:15" }
+        ],
+        result: {
+            title: "Maintenance Scheduled Successfully",
+            details: [
+                { label: "Line", value: "2" },
+                { label: "Issue", value: "Vibration anomaly" },
+                { label: "Scheduled Date", value: "Jan 18, 2026" }
             ],
-            result: {
-                title: "Payment Scheduled",
-                details: [
-                    { label: "Action", value: "Vendor Payment" },
-                    { label: "Amount", value: "$18,750.00" },
-                    { label: "Execution Date", value: "February 1, 2026" },
-                    { label: "Method", value: "ACH" }
-                ],
-                note: "Payment released only after inventory verification."
-            }
-        },
-        scenario2: {
-            title: "Inventory Invoice Tracking",
-            input: "Automated invoice categorization",
-            steps: [
-                {
-                    title: "Inventory invoice detected from transaction feed",
-                    content: "Purchase order matched to invoice.<br><strong>Category:</strong> Inventory",
-                    status: "success",
-                    timestamp: "10:30:01"
-                },
-                {
-                    title: "Category: COGS",
-                    content: "Invoices categorized automatically.<br>AI confidence: 96%",
-                    status: "success",
-                    timestamp: "10:30:02"
-                },
-                {
-                    title: "PO matching completed",
-                    content: "Invoice matched to PO #4521<br>Quantities verified",
-                    status: "success",
-                    timestamp: "10:30:03"
-                },
-                {
-                    title: "Payment queued",
-                    content: "Invoice approved for payment<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
-                    status: "success",
-                    timestamp: "10:30:04"
-                }
-            ]
-        },
-        scenario3: {
-            title: "Franchise Royalty Automation",
-            input: "Calculate and pay franchise royalties",
-            steps: [
-                {
-                    title: "Royalty calculation initiated",
-                    content: "Monthly revenue data collected.<br><strong>Gross sales:</strong> $125,400<br><strong>Royalty rate:</strong> 6%",
-                    status: "success",
-                    timestamp: "09:00:01"
-                },
-                {
-                    title: "Calculation verified",
-                    content: "Royalty amount computed.<br><strong>Amount due:</strong> $7,524.00",
-                    status: "success",
-                    timestamp: "09:00:02"
-                },
-                {
-                    title: "Payment authorization",
-                    content: "Franchise agreement terms verified.<br>Payment terms: Net-30",
-                    status: "success",
-                    timestamp: "09:00:03"
-                },
-                {
-                    title: "Payment scheduled",
-                    content: "Royalty payment scheduled for February 1, 2026.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
-                    status: "success",
-                    timestamp: "09:00:04"
-                }
+            note: "Downtime risk reduced by 80%."
+        }
+    },
+    hospitality: {
+        title: "Guest Experience Automation",
+        input: "Personalize guest room settings upon check-in.",
+        steps: [
+            { title: "Reservation Detected", content: "Guest John Doe checked in.", status: "success", timestamp: "15:00:01" },
+            { title: "Preferences Loaded", content: "Room temperature set to 72°F, favorite music playlist started.", status: "success", timestamp: "15:00:05" },
+            { title: "Welcome Message Sent", content: "Personalized welcome sent to guest's phone.", status: "success", timestamp: "15:00:10" },
+            { title: "Feedback Requested", content: "Automated feedback request scheduled for checkout.", status: "success", timestamp: "15:00:15" }
+        ],
+        result: {
+            title: "Guest Experience Personalized",
+            details: [
+                { label: "Guest Name", value: "John Doe" },
+                { label: "Preferences Applied", value: "2" },
+                { label: "Feedback Scheduled", value: "Yes" }
             ],
-            result: {
-                title: "Royalty Payment Scheduled",
-                details: [
-                    { label: "Action", value: "Franchise Royalty Payment" },
-                    { label: "Amount", value: "$7,524.00" },
-                    { label: "Execution Date", value: "February 1, 2026" },
-                    { label: "Method", value: "ACH" }
-                ],
-                note: "Payment released only after revenue verification."
-            }
+            note: "Higher guest satisfaction and loyalty."
+        }
+    },
+    energy: {
+        title: "Energy Usage Optimization",
+        input: "Reduce peak energy consumption automatically.",
+        steps: [
+            { title: "Usage Data Collected", content: "Real-time energy usage from all meters.", status: "success", timestamp: "12:00:01" },
+            { title: "Peak Detected", content: "Usage spike at 2pm. Automated load balancing triggered.", status: "warning", timestamp: "14:00:00" },
+            { title: "Devices Adjusted", content: "Non-essential devices powered down for 30 minutes.", status: "success", timestamp: "14:00:05" },
+            { title: "Savings Calculated", content: "Estimated savings: $320/month.", status: "success", timestamp: "14:00:10" }
+        ],
+        result: {
+            title: "Peak Usage Reduced",
+            details: [
+                { label: "Peak Time", value: "2pm" },
+                { label: "Devices Adjusted", value: "12" },
+                { label: "Monthly Savings", value: "$320" }
+            ],
+            note: "Sustainability goals supported."
+        }
+    },
+    nonprofit: {
+        title: "Donor Engagement Workflow",
+        input: "Automate donor thank-you and impact updates.",
+        steps: [
+            { title: "Donation Received", content: "$5,000 donation from Jane Smith.", status: "success", timestamp: "11:00:01" },
+            { title: "Thank-You Sent", content: "Personalized thank-you email sent to donor.", status: "success", timestamp: "11:00:05" },
+            { title: "Impact Update Scheduled", content: "Impact report scheduled for next quarter.", status: "success", timestamp: "11:00:10" },
+            { title: "Social Media Updated", content: "Donation highlighted on social channels.", status: "success", timestamp: "11:00:15" }
+        ],
+        result: {
+            title: "Donor Engagement Automated",
+            details: [
+                { label: "Donor Name", value: "Jane Smith" },
+                { label: "Donation Amount", value: "$5,000" },
+                { label: "Impact Update", value: "Scheduled" }
+            ],
+            note: "Improved donor retention."
+        }
+    },
+    content: {
+        title: "Content Publishing Workflow",
+        input: "Schedule and auto-publish social media posts.",
+        steps: [
+            { title: "Content Created", content: "New post drafted for Instagram and LinkedIn.", status: "success", timestamp: "13:00:01" },
+            { title: "Approval Workflow", content: "Content approved by manager.", status: "success", timestamp: "13:00:05" },
+            { title: "Scheduled for Publishing", content: "Post scheduled for Jan 17, 2026, 10am.", status: "success", timestamp: "13:00:10" },
+            { title: "Published", content: "Content auto-published to all channels.", status: "success", timestamp: "Jan 17, 2026, 10:00:00" }
+        ],
+        result: {
+            title: "Content Published Successfully",
+            details: [
+                { label: "Channels", value: "Instagram, LinkedIn" },
+                { label: "Approval", value: "Manager" },
+                { label: "Publish Date", value: "Jan 17, 2026" }
+            ],
+            note: "Consistent brand presence."
+        }
+    },
+    legal: {
+        title: "Contract Review Automation",
+        input: "Scan and flag risky clauses in contracts.",
+        steps: [
+            { title: "Contract Uploaded", content: "New contract uploaded for review.", status: "success", timestamp: "16:00:01" },
+            { title: "AI Review", content: "AI scanned contract for risky clauses.", status: "warning", timestamp: "16:00:05" },
+            { title: "Risks Flagged", content: "2 risky clauses flagged for legal team.", status: "danger", timestamp: "16:00:10" },
+            { title: "Report Generated", content: "Summary report sent to legal team.", status: "success", timestamp: "16:00:15" }
+        ],
+        result: {
+            title: "Contract Risks Flagged",
+            details: [
+                { label: "Contracts Reviewed", value: "1" },
+                { label: "Risks Flagged", value: "2" },
+                { label: "Report Sent", value: "Yes" }
+            ],
+            note: "Faster, safer contract review."
+        }
+    },
+    construction: {
+        title: "Project Progress Automation",
+        input: "Track daily progress and flag delays on site.",
+        steps: [
+            { title: "Daily Report Submitted", content: "Site manager submitted daily progress report.", status: "success", timestamp: "17:00:01" },
+            { title: "Progress Analyzed", content: "AI compared planned vs actual progress.", status: "success", timestamp: "17:00:05" },
+            { title: "Delay Detected", content: "Concrete pour delayed by 1 day.", status: "warning", timestamp: "17:00:10" },
+            { title: "Alert Sent", content: "Delay alert sent to project team.", status: "danger", timestamp: "17:00:15" }
+        ],
+        result: {
+            title: "Project Delay Flagged",
+            details: [
+                { label: "Task Delayed", value: "Concrete pour" },
+                { label: "Delay", value: "1 day" },
+                { label: "Alert Sent", value: "Yes" }
+            ],
+            note: "Proactive project management."
+        }
+    },
+    technology: {
+        title: "Incident Response Automation",
+        input: "Detect and respond to server outages automatically.",
+        steps: [
+            { title: "Outage Detected", content: "Server outage detected at 2:15am.", status: "danger", timestamp: "02:15:01" },
+            { title: "Incident Ticket Created", content: "Ticket auto-created in ITSM system.", status: "success", timestamp: "02:15:05" },
+            { title: "Team Notified", content: "IT team notified via Slack and SMS.", status: "success", timestamp: "02:15:10" },
+            { title: "Resolution Verified", content: "Server restored and verified by monitoring.", status: "success", timestamp: "02:45:00" }
+        ],
+        result: {
+            title: "Incident Resolved Automatically",
+            details: [
+                { label: "Outage Time", value: "2:15am" },
+                { label: "Resolution Time", value: "2:45am" },
+                { label: "Team Notified", value: "Yes" }
+            ],
+            note: "Reduced downtime and faster recovery."
         }
     }
 };
-
-function loadScenario(scenarioType) {
-    // Use industryScenarios if available, fallback to legacy scenarios
-    const scenario = industryScenarios[scenarioType] || scenarios[scenarioType];
-    if (!scenario) return;
-    const aiInput = document.getElementById('aiInput');
-    aiInput.value = scenario.input;
-    aiInput.style.borderColor = 'var(--color-accent-primary)';
-    setTimeout(() => {
-        aiInput.style.borderColor = '';
-    }, 1000);
-    showScenarioResult(scenarioType);
+if (typeof industryScenarios === 'undefined') {
+    var industryScenarios = _industryScenarios_patch;
+} else {
+    Object.assign(industryScenarios, _industryScenarios_patch);
 }
-
-function executeAI() {
-    if (isExecuting) return;
-    
-    const inputValue = document.getElementById('aiInput').value.trim();
-    
-    if (!inputValue) {
-        alert('Please enter a command or select an example.');
-        return;
-    }
-    
-    // Determine scenario based on input
-    let scenarioType = 'rent'; // default
-    if (inputValue.toLowerCase().includes('bill') || inputValue.toLowerCase().includes('utilities')) {
-        scenarioType = 'bills';
-    } else if (inputValue.toLowerCase().includes('fail') || inputValue.toLowerCase().includes('detect')) {
-        scenarioType = 'failure';
-    }
-    
-    isExecuting = true;
-    
-    // Clear timeline
-    const timeline = document.getElementById('timeline');
-    timeline.innerHTML = '';
-    
-    // Show scenario
-    const scenario = scenarios[scenarioType];
-    
-    // Animate steps
-    scenario.steps.forEach((step, index) => {
-        setTimeout(() => {
-            addTimelineStep(step, index);
-            // After last step, show result
-            if (index === scenario.steps.length - 1) {
                 setTimeout(() => {
                     showScenarioResult(scenarioType);
                 }, 800);
@@ -922,12 +713,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:925', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:926', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:927');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:928');
-    console.log('ESC : Return to Home - script.js:929');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:930');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:716', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:717', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:718');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:719');
+    console.log('ESC : Return to Home - script.js:720');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:721');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -935,7 +726,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:938`);
+    console.log(`Switching to ${content.name}... - script.js:729`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -996,7 +787,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:999`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:790`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1078,7 +869,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1081`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:872`);
         return;
     }
     
@@ -1094,22 +885,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1097');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:888');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1104', this.value);
+                console.log('Organization changed to: - script.js:895', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1109');
+            console.log('Initializing default organization: property - script.js:900');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1112');
+            console.error('Organization selector not found! - script.js:903');
         }
     }, 100);
 });
@@ -1152,7 +943,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1155');
+        console.error('No scenario found - script.js:946');
         return;
     }
     
@@ -1549,7 +1340,15 @@ document.addEventListener('DOMContentLoaded', () => {
     startPlaceholderRotation();
 });
 
-
-// Ensure demo functions are available globally for HTML event handlers
-window.playHeroDemo = playHeroDemo;
-window.closeHeroDemo = closeHeroDemo;
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        navigateToScreen,
+        loadScenario,
+        executeAI,
+        switchOrganization,
+        playHeroDemo,
+        closeHeroDemo,
+        startPlaceholderRotation
+    };
+}

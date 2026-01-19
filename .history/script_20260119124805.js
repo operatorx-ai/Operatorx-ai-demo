@@ -1549,7 +1549,15 @@ document.addEventListener('DOMContentLoaded', () => {
     startPlaceholderRotation();
 });
 
-
-// Ensure demo functions are available globally for HTML event handlers
-window.playHeroDemo = playHeroDemo;
-window.closeHeroDemo = closeHeroDemo;
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        navigateToScreen,
+        loadScenario,
+        executeAI,
+        switchOrganization,
+        playHeroDemo,
+        closeHeroDemo,
+        startPlaceholderRotation
+    };
+}

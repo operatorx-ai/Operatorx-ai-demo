@@ -1,3 +1,139 @@
+            result: {
+                title: "Royalty Payment Scheduled",
+                details: [
+                    { label: "Action", value: "Franchise Royalty" },
+                    { label: "Amount", value: "$7,524.00" },
+                    { label: "Execution Date", value: "February 15, 2026" },
+                    { label: "Method", value: "Wire Transfer" }
+                ],
+                note: "Auto-calculated based on monthly sales data."
+            }
+        }
+    },
+    government: {
+        scenario1: {
+            title: "Scheduled Disbursement",
+            input: "Schedule disbursement only if approvals are complete.",
+            steps: [
+                {
+                    title: "Intent Identified",
+                    content: "Government disbursement detected.<br><strong>Type:</strong> Grant Payment<br><strong>Conditional logic applied</strong>",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Policy Validation",
+                    content: "Government compliance rules verified.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Regulatory compliance satisfied</span>",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Condition Verification",
+                    content: "Approval status checked.<br><strong>Authorization 1:</strong> ✔ Approved<br><strong>Authorization 2:</strong> ✔ Approved",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Decision Engine",
+                    content: "All conditions met. Operation approved.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Approved for execution</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Disbursement Scheduled",
+                details: [
+                    { label: "Action", value: "Grant Disbursement" },
+                    { label: "Amount", value: "$50,000.00" },
+                    { label: "Execution Date", value: "February 1, 2026" },
+                    { label: "Method", value: "Wire Transfer" }
+                ],
+                note: "Full audit trail generated for compliance review."
+            }
+        },
+        scenario2: {
+            title: "Compliance-Checked Payment",
+            input: "Vendor payment with compliance verification",
+            steps: [
+                {
+                    title: "Payment request received",
+                    content: "Vendor payment identified.<br><strong>Vendor:</strong> Infrastructure LLC<br><strong>Amount:</strong> $125,000",
+                    status: "success",
+                    timestamp: "10:30:01"
+                },
+                {
+                    title: "Compliance verification",
+                    content: "Vendor status checked.<br>✔ Active registration<br>✔ Tax compliance current",
+                    status: "success",
+                    timestamp: "10:30:02"
+                },
+                {
+                    title: "Budget allocation verified",
+                    content: "Funds availability confirmed.<br><strong>Budget line:</strong> Capital Projects<br><strong>Remaining:</strong> $450,000",
+                    status: "success",
+                    timestamp: "10:30:03"
+                },
+                {
+                    title: "Payment approved",
+                    content: "All checks passed. Payment authorized.<br><span class='step-status success' style='display: inline-block; margin-top: 0.5rem;'>✔ Workflow completed</span>",
+                    status: "success",
+                    timestamp: "10:30:04"
+                }
+            ],
+            result: {
+                title: "Payment Approved",
+                details: [
+                    { label: "Action", value: "Vendor Payment" },
+                    { label: "Amount", value: "$125,000.00" },
+                    { label: "Execution Date", value: "January 20, 2026" },
+                    { label: "Method", value: "ACH" }
+                ],
+                note: "Full compliance documentation attached to audit log."
+            }
+        },
+        scenario3: {
+            title: "Audit-Ready Reporting",
+            input: "Generate quarterly audit report",
+            steps: [
+                {
+                    title: "Report generation initiated",
+                    content: "Q4 2025 audit data collected.<br><strong>Transactions:</strong> 1,247<br><strong>Total disbursed:</strong> $2.4M",
+                    status: "success",
+                    timestamp: "09:00:01"
+                },
+                {
+                    title: "Data validation",
+                    content: "Transaction integrity verified.<br>✔ No discrepancies found<br>✔ All authorizations documented",
+                    status: "success",
+                    timestamp: "09:00:02"
+                },
+                {
+                    title: "Report compilation",
+                    content: "Audit trail formatted for review.<br>Format: PDF + CSV exports",
+                    status: "success",
+                    timestamp: "09:00:03"
+                },
+                {
+                    title: "Report ready",
+                    content: "Quarterly audit report generated.<br><span class='badge' style='background: var(--gradient-success); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; display: inline-block; margin-top: 0.5rem;'>Report available</span>",
+                    status: "success",
+                    timestamp: "09:00:04"
+                }
+            ],
+            result: {
+                title: "Audit Report Generated",
+                details: [
+                    { label: "Period", value: "Q4 2025" },
+                    { label: "Transactions", value: "1,247" },
+                    { label: "Total Disbursed", value: "$2,400,000.00" },
+                    { label: "Format", value: "PDF + CSV" }
+                ],
+                note: "Report includes complete audit trail for all transactions."
+            }
+        }
+    }
+};
+};
 
 // ===== LEGACY SCENARIO DATA (for backwards compatibility) =====
 const scenarios = {
@@ -195,11 +331,11 @@ function navigateToScreen(screenNumber) {
             if (!industryContent[org]) {
                 org = 'property';
                 if (orgSelector) orgSelector.value = 'property';
-                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:198');
+                console.error('Industry content missing for selected org, falling back to Property Management. - script.js:734');
             }
             // You can add more fallback logic here for other dynamic containers
         } catch (err) {
-            console.error('Error rendering dynamic content: - script.js:202', err);
+            console.error('Error rendering dynamic content: - script.js:738', err);
         }
 
         // Initialize screen-specific content
@@ -922,12 +1058,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:925', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-    console.log('%cKeyboard Shortcuts: - script.js:926', 'font-size: 14px; color: #8b5cf6;');
-    console.log('Ctrl/Cmd + → : Next Screen - script.js:927');
-    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:928');
-    console.log('ESC : Return to Home - script.js:929');
-    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:930');
+    console.log('%c🤖 OperatorxAI Demo Loaded - script.js:1461', 'font-size: 20px; color: #6366f1; font-weight: bold;');
+    console.log('%cKeyboard Shortcuts: - script.js:1462', 'font-size: 14px; color: #8b5cf6;');
+    console.log('Ctrl/Cmd + → : Next Screen - script.js:1463');
+    console.log('Ctrl/Cmd + ← : Previous Screen - script.js:1464');
+    console.log('ESC : Return to Home - script.js:1465');
+    console.log('Ctrl/Cmd + Enter (in AI Input) : Execute Command - script.js:1466');
 });
 
 // ===== ORGANIZATION SWITCHING =====
@@ -935,7 +1071,7 @@ function switchOrganization(orgType) {
     currentOrg = orgType;
     const content = industryContent[orgType];
     
-    console.log(`Switching to ${content.name}... - script.js:938`);
+    console.log(`Switching to ${content.name}... - script.js:1474`);
     
     // Update hero section
     const heroHeadline = document.querySelector('.hero-headline');
@@ -996,7 +1132,7 @@ function switchOrganization(orgType) {
         `;
     }
     
-    console.log(`✓ Switched to ${content.name} organization - script.js:999`);
+    console.log(`✓ Switched to ${content.name} organization - script.js:1535`);
 }
 
 // ===== UPDATE DASHBOARD =====
@@ -1078,7 +1214,7 @@ function updateDashboard(content) {
 function loadIndustryScenario(scenarioKey) {
     const scenario = industryScenarios[currentOrg]?.[scenarioKey];
     if (!scenario) {
-        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1081`);
+        console.error(`Scenario ${scenarioKey} not found for ${currentOrg} - script.js:1617`);
         return;
     }
     
@@ -1094,22 +1230,22 @@ function loadIndustryScenario(scenarioKey) {
 
 // Initialize organization selector
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1097');
+    console.log('DOM Content Loaded  Initializing organization selector... - script.js:1633');
     
     // Small delay to ensure all DOM elements are fully rendered
     setTimeout(() => {
         const orgSelector = document.getElementById('orgSelector');
         if (orgSelector) {
             orgSelector.addEventListener('change', function() {
-                console.log('Organization changed to: - script.js:1104', this.value);
+                console.log('Organization changed to: - script.js:1640', this.value);
                 switchOrganization(this.value);
             });
             
             // Initialize with default organization
-            console.log('Initializing default organization: property - script.js:1109');
+            console.log('Initializing default organization: property - script.js:1645');
             switchOrganization('property');
         } else {
-            console.error('Organization selector not found! - script.js:1112');
+            console.error('Organization selector not found! - script.js:1648');
         }
     }, 100);
 });
@@ -1152,7 +1288,7 @@ executeAI = async function() {
     
     const scenario = orgScenarios[scenarioKey];
     if (!scenario) {
-        console.error('No scenario found - script.js:1155');
+        console.error('No scenario found - script.js:1691');
         return;
     }
     
@@ -1549,7 +1685,15 @@ document.addEventListener('DOMContentLoaded', () => {
     startPlaceholderRotation();
 });
 
-
-// Ensure demo functions are available globally for HTML event handlers
-window.playHeroDemo = playHeroDemo;
-window.closeHeroDemo = closeHeroDemo;
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        navigateToScreen,
+        loadScenario,
+        executeAI,
+        switchOrganization,
+        playHeroDemo,
+        closeHeroDemo,
+        startPlaceholderRotation
+    };
+}
