@@ -14,50 +14,6 @@ const industryContent = {
             { scenario: "scenario1", text: "Automate rent collection" },
             { scenario: "scenario2", text: "Handle late payments" },
             { scenario: "scenario3", text: "Schedule maintenance invoices" }
-        ],
-        roiMetrics: [
-            { icon: "💰", value: "$127,000", label: "Monthly Cost Savings", detail: "vs. manual processing" },
-            { icon: "⏱️", value: "340 hrs", label: "Time Reclaimed", detail: "per month" },
-            { icon: "🎯", value: "99.2%", label: "Accuracy Rate", detail: "87% manual baseline" },
-            { icon: "📈", value: "12,450", label: "Operations Processed", detail: "this month" }
-        ],
-        beforeAfter: {
-            before: [
-                "⏰ 5 days to process monthly invoices",
-                "👥 2 full-time accountants required",
-                "❌ 13% error rate on data entry",
-                "📊 Weekly reconciliation meetings",
-                "🐌 5-day month-end close"
-            ],
-            beforeCost: "$18,400",
-            after: [
-                "⚡ 4 hours to process monthly invoices",
-                "🤖 0 manual intervention needed",
-                "✅ 99.2% accuracy with AI validation",
-                "🎯 Real-time continuous reconciliation",
-                "⚡ 6-hour month-end close"
-            ],
-            afterCost: "$4,200"
-        },
-        businessOutcomes: [
-            {
-                icon: "🛡️",
-                title: "Prevented $45,000 Duplicate Payment",
-                description: "AI detected vendor invoice already paid under different reference number",
-                badge: "Risk Prevention"
-            },
-            {
-                icon: "🔍",
-                title: "Caught $12,300 Overcharge",
-                description: "Automatically identified pricing discrepancy in recurring vendor contract",
-                badge: "Cost Recovery"
-            },
-            {
-                icon: "⚡",
-                title: "Reduced Close Time 80%",
-                description: "Month-end reconciliation dropped from 5 days to 6 hours",
-                badge: "Efficiency Gain"
-            }
         ]
     }
 };
